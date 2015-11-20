@@ -1,0 +1,27 @@
+.body {
+	background-color: #243d92;
+}
+
+.logintext {
+	color: white;
+	margin-top: 5px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.login1 input{
+	display: block;
+}
+
+.mainwrap {
+	margin: auto;
+	width: 173px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 250px;
+}
+
+.loginbutton {
+	height: 50px;
+	width: 200px;
+	text-align: center;
+}
