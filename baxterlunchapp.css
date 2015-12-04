@@ -3,18 +3,22 @@
 }
 
 .logintext {
-	color: white;
 	margin-top: 5px;
-	font-family: 'Roboto Condensed', sans-serif;
+	margin-left: 5px;
 }
 
-.login1 input{
+.login1 .logintext{
 	display: block;
 }
 
-.mainwrap {
+.login1 .loginlabel{
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.loginwrap {
 	margin: auto;
-	width: 173px;
+	width: 200px;
 	padding-left: 12px;
 	padding-right: 12px;
 	padding-top: 250px;
@@ -22,6 +26,12 @@
 
 .loginbutton {
 	height: 50px;
-	width: 200px;
+	width: 184px;
 	text-align: center;
+	margin-top: 8px;
+	margin-bottom: 16px;
+}
+
+.checkbox {
+	margin-left: 6px;
 }
