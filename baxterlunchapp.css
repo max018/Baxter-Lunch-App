@@ -1,0 +1,139 @@
+.body {
+	background-color: #243d92;
+}
+
+.logintext {
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.login1 .logintext{
+	display: block;
+}
+
+.login1 .loginlabel{
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.loginwrap {
+	margin: auto;
+	width: 200px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 250px;
+}
+
+.loginbutton {
+	height: 50px;
+	width: 184px;
+	text-align: center;
+	margin-top: 8px;
+	margin-bottom: 16px;
+}
+
+.checkbox {
+	margin-left: 6px;
+}
+
+.baxterimage {
+	border-bottom-style: solid;
+	border-bottom-color: #ffffff;
+	display: block;
+	width: 185px;
+	padding-right: 15px;
+}
+
+.header {
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+	text-align: center;
+}
+
+.sidebartext1 {
+	display: block;
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	display: block;
+	width: 80px;
+	padding-top: 30px;
+	padding-right: 65px;
+	padding-bottom: 70px;
+	padding-left: 55px;
+	border-bottom-style: solid;
+	border-bottom-color: white;
+	
+}
+
+.sidebartext2 {
+	display: block;
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	display: block;
+	width: 80px;
+	padding-top: 30px;
+	padding-right: 75px;
+	padding-bottom: 70px;
+	padding-left: 45px;
+	border-bottom-style: solid;
+	border-bottom-color: white;
+	
+}
+
+.sidebartext3 {
+	display: block;
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	display: block;
+	width: 80px;
+	padding-top: 25px;
+	padding-right: 60px;
+	padding-bottom: 70px;
+	padding-left: 60px;
+	border-bottom-style: solid;
+	border-bottom-color: white;
+	
+}
+
+.column1 {
+	float: left;
+	border-right-style: solid;
+	border-right-color: white;
+	width: 200px;
+	height: 760px;
+	margin-right: 70px;
+}
+
+.main_content {
+	width: 930px;
+	float: left;
+}
+
+.orderoverview {
+	float: left;
+	margin-top: 100px;
+	margin-left: 0px;
+	margin-right: 120px;
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 30px;
+	
+}
+
+.listcontainer {
+	margin-top: 0px;
+}
+
+.menulist {
+	margin-top: 5px;
+	font-size: 14px;
+}
