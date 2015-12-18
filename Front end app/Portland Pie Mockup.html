@@ -3,46 +3,26 @@
 <head>
 <title>Portland Pie</title>
 <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
-<style>
-body {
-
-color: white;
-font-family: "Roboto Condensed";
-text-align: center;
-width: 320px;
-height: 480px;
-border: 10px solid black;
-}
-.logo {
-height: 125px;
-border: 10px solid #887CAF;
-background-color:white;
-}
-.space {
-background-color: purple;
-width: 320px;
-height: 480px;
-}
-</style>
+<link href="resturantmockup.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="space">
 <div class="button">
 <form>
-<button type="button" style="margin:10px;">Back</button>
+<button type="button">Back</button>
 </form>
 </div>
 <div class="logo">
-<img src="imageedit_1_4737630043.gif" width="300px" height="150px"></img>
+<img src="imageedit_1_4737630043.gif" width="250px" height="150px"></img>
 </div>
-<h2 style="text-align:center;margin-bottom:5px;">Select Your Meal</h2>
+<h2>Select Your Meal</h2>
 <form>
  <select>
 <option value="2slice">2 Slices Of Pizza + Beverage</option>
 <option value="1slice1/2salad">1 Slice Of Pizza + Half Salad</option>
 <option value="salad">Full Salad + Beverage</option>
 </select>
-<h3 style="text-align:center;margin-top:30px;margin-bottom:5px;">Select Your Pizza</h3>
+<h3>Select Your Pizza</h3>
 <select>
 <option value="cheese">Cheese</option>
 <option value="pep">Pepperoni</option>
@@ -50,11 +30,13 @@ height: 480px;
 <option value="great">Great Diamond</option>
 <option value="ship">Shipyard</option>
 </select>
-<h3 style="text-align:center;margin-top:30px;margin-bottom:5px;">Select Your Salad</h3>
-<select style="margin-bottom:20px;text-align:center;">
+<h3>Select Your Salad</h3>
+<div id="selectpadding">
+<select>
 <option value="garden">Garden Salad</option>
 <option value="ceaser">Ceaser Salad</option>
 </select>
+</div>
 <br />
 <button type="button">Submit</button>
 </form>
