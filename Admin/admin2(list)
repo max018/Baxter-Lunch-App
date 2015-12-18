@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="baxterlunchapp-admin.css">
+		<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
+	</head>
+	
+	<body class="body">
+		<div class="column1">
+			<div class="baxterimage">
+				<img src="http://www.jspritz.com/uploads/3/5/5/0/3550857/4144491.jpg">
+			</div>
+			<div class="sidebartext1">
+				Orders
+			</div>
+			<div class="sidebartext2">
+				Students
+			</div>
+			<div class="sidebartext3">
+				Meals
+			</div>
+		</div>
+		<div>
+			<table cellspacing="0" cellpadding="5" class="table">
+				<tr>
+					<th>Restaurant</th>
+					<th>Name</th>
+					<th>Dish</th>
+					<th>Date</th>
+				</tr>
+				<tr>
+					<td>Zen</td>
+					<td>Max</td>
+					<td>Lo Mein</td>
+					<td>11-11-11</td>
+				</tr>
+								<tr>
+					<td>Zen</td>
+					<td>Max</td>
+					<td>Lo Mein</td>
+					<td>11-11-11</td>
+				</tr>
+			</table>
+	</body>
+<html>
