@@ -1,4 +1,5 @@
 from flask import abort, request
+from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
 from restaurants import restaurants
 
@@ -9,14 +10,18 @@ class Validator:
     def run(self):
         try:
             data = request.get_json()
+            if data is None:
+                raise BadRequestJSON('not a JSON request')
             self.val(data)
             return data
         except BadRequest as e:
             raise BadRequestJSON('malformed JSON')
         except KeyError as e:
-            raise BadRequest('missing key: {!r}'.format(e.args[0]))
+            raise BadRequestJSON('missing key: {!r}'.format(e.args[0]))
+        except TypeError as e:
+            raise BadRequestJSON('invalid request structure')
         except AssertionError as e:
-            raise BadRequest(*e.args)
+            raise BadRequestJSON(*e.args)
 
 @Validator
 def order_val(data):

@@ -2,6 +2,5 @@ from flask import Flask
 
 app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run()
+from validations import order_val
 
