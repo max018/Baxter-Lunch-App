@@ -12,8 +12,11 @@ class Validator:
             data = request.get_json()
             if data is None:
                 raise BadRequestJSON('not a JSON request')
-            self.val(data)
-            return data
+            result = self.val(data)
+            if result is None:
+                return data
+            else:
+                return result
         except BadRequest as e:
             raise BadRequestJSON('malformed JSON')
         except KeyError as e:
