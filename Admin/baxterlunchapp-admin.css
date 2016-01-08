@@ -2,6 +2,13 @@
 	background-color: #243d92;
 }
 
+.randomtext1 {
+	color: white;
+	font-size: 19px;
+	font-family: 'Roboto Condensed', sans-serif;
+	margin-left: 400px;
+}
+
 .logintext {
 	margin-top: 5px;
 	margin-left: 5px;
@@ -112,7 +119,7 @@
 	border-right-color: white;
 	width: 200px;
 	height: 760px;
-	margin-right: 125px;
+	margin-right:-px;
 }
 
 .main_content {
@@ -151,3 +158,29 @@
 	width: 800px;
 	margin-top: 100px;
 }
+
+.searchbar1{
+		margin-top: 10px;
+}
+
+.table0{
+	float: right;
+	width: 950px;
+	margin-top: 200px;
+	margin-left: 400px;
+	
+}
+
+.admin2container{
+	width: 1300px;
+}
+
+.box{
+	margin-left: 400px;
+}
+
+.table1{
+	margin-left: 400px;
+	margin-top: 0px;
+}
+ 

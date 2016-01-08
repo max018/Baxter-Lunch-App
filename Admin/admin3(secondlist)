@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="baxterlunchapp-admin.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
@@ -22,76 +21,63 @@
 					Meals
 				</div>
 			</div>
-			<div class="table0">
-				<table cellspacing="0" cellpadding="5" class="table1">
+			<div class="randomtext1">
+				Search student name here...
+			</div>
+			
+			<div class="box">
+				<div class="container-1">
+					<span class="icon"><i class="fa fa-search"></i></span>
+					<input class="searchbar1" type="search" id="search" placeholder="Search..." />
+				</div>
+			</div>
+			<div class="table1">
+				<table cellspacing="0" cellpadding="5" class="table">
 					<tr>
-						<th>Restaurant</th>
 						<th>Name</th>
-						<th>Dish</th>
-						<th>Date</th>
+						<th>Money (Dollars)</th>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 					<tr>
-						<td>Zen</td>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
-									<tr>
-						<td>Zen</td>
+					<tr>
 						<td>Max</td>
-						<td>Lo Mein</td>
-						<td>11-11-11</td>
+						<td>5.00</td>
 					</tr>
 				</table>
-			</div>
 		</div>
 	</body>
 <html>
