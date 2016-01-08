@@ -1,6 +1,9 @@
 from flask import abort, request
 from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
+from app import app
+
+from oauth2client import client, crypt
 from restaurants import restaurants
 
 class Validator:
@@ -25,6 +28,17 @@ class Validator:
             raise BadRequestJSON('invalid request structure')
         except AssertionError as e:
             raise BadRequestJSON(*e.args)
+
+@Validator
+def logged_in_val(data):
+    try:
+        idinfo = client.verify_id_token(token, app.config.CLIENT_ID)
+        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise crypt.AppIdentityError("Wrong issuer.")
+        if idinfo['hd'] != 'baxter-academy.org':
+            raise crypt.AppIdentityError("Wrong hosted domain.")
+    except crypt.AppIdentityError as e:
+        raise BadRequestJSON(*e.args)
 
 @Validator
 def order_val(data):
