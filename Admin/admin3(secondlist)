@@ -31,7 +31,7 @@
 					<input class="searchbar1" type="search" id="search" placeholder="Search..." />
 				</div>
 			</div>
-			<div class="table1">
+			<div class="table0">
 				<table cellspacing="0" cellpadding="5" class="table">
 					<tr>
 						<th>Name</th>
