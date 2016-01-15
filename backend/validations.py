@@ -40,7 +40,7 @@ class Validator:
 @Validator
 def logged_in_val(data):
     try:
-        idinfo = client.verify_id_token(token, app.config['CLIENT_ID'])
+        idinfo = client.verify_id_token(data['token'], app.config['CLIENT_ID'])
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise crypt.AppIdentityError("Wrong issuer.")
         if idinfo['hd'] != 'baxter-academy.org':
