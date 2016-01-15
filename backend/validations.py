@@ -7,6 +7,9 @@ from functools import wraps
 from oauth2client import client, crypt
 from restaurants import restaurants
 
+def assert_type(v, t):
+    assert isinstance(v, t), '{} is not a {}'.format(v, t.__name__)
+
 class Validator:
     def __init__(self, val):
         self.val = val
@@ -40,7 +43,9 @@ class Validator:
 @Validator
 def logged_in_val(data):
     try:
-        idinfo = client.verify_id_token(data['token'], app.config['CLIENT_ID'])
+        assert_type(data['token'], str)
+        token = bytes(data['token'], 'utf-8')
+        idinfo = client.verify_id_token(token, app.config['CLIENT_ID'])
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise crypt.AppIdentityError("Wrong issuer.")
         if idinfo['hd'] != 'baxter-academy.org':
