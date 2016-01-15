@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+		<link rel="stylesheet" type="text/css" href="baxterlunchapp-admin.css">
+		<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- JQUERY \ ANGULAR -->	
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
@@ -10,27 +11,194 @@
 
 
 		<!-- BAXTER JS -->
-		<script src="baxter.js"></script>
-
-
+		<script src="baxter.js"></script>		
 	</head>
 	
-	<body  ng-app="baxterApp" ng-controller="baxterCtrl">
-
-		<div>
-			<a ng-click="view='banana'">What grows in Florida?</a>
-			<br /><br />
-			<a ng-click="view='apple'">What grows in Maine?</a>			
-			<br /><br />
+	<body class="body" ng-app="baxterApp" ng-controller="baxterCtrl">
+		<div class="admin2container">
+			<div class="column1">
+				<div class="baxterimage">
+					<img src="http://www.jspritz.com/uploads/3/5/5/0/3550857/4144491.jpg">
+				</div>
+				<div class="sidebartext1" ng-click="view='Orders'">
+					Orders
+				</div>
+				<div class="sidebartext2" ng-click="view='Students'">
+					Students
+				</div>
+				
+			</div>
+			<div class="column2" ng-if="view=='Orders'">
+				
+					<div class="topLeft">
+						<div class="randomtext1">
+							Search order here...
+						</div>
+						<div class="box">
+							<div class="container-1">
+								<span class="icon"><i class="fa fa-search"></i></span>
+								<input class="searchbar1" type="search" id="search" placeholder="Search..." />
+							</div>
+						</div>
+					</div>
+					<div class="topRight">
+						<div class="menu-wrap">
+							<nav class="menu">
+								<ul class="clearfix">
+									<li>
+										<a href="#">Restaurants <span class="arrow"> &#9660; </span></a>
+										<ul class="sub-menu">
+											<li><a href="#">Zen Bistro</a></li>
+											<li><a href="#">B.Good</a></li>
+											<li><a href="#">Kamasouptra</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">Students<span class="arrow">&#9660;</span></a>
+				 
+										<ul class="sub-menu">
+											<li><a href="#">9th Grade</a></li>
+											<li><a href="#">10th Grade</a></li>
+											<li><a href="#">11th Grade</a></li>
+											<li><a href="#">12th Grade</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="table1">
+						<table cellspacing="0" cellpadding="5" class="table1">
+							<tr>
+								<th class="topbarofgraph1">Restaurant</th>
+								<th class="topbarofgraph1">Name</th>
+								<th class="topbarofgraph1">Dish</th>
+								<th class="topbarofgraph1">Date</th>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+							<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+											<tr>
+								<td>Zen</td>
+								<td>Max</td>
+								<td>Lo Mein</td>
+								<td>11-11-11</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		
+			<div class="column2" ng-if="view=='Students'">
+				<div class="randomtext1">
+					Search student name here...
+				</div>
+				
+				<div class="box">
+					<div class="container-1">
+						<span class="icon"><i class="fa fa-search"></i></span>
+						<input class="searchbar1" type="search" id="search" placeholder="Search..." />
+					</div>
+				</div>
+				<div class="table0">
+					<table cellspacing="0" cellpadding="5" class="table">
+						<tr>
+							<th>Name</th>
+							<th>Money (Dollars)</th>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+						<tr>
+							<td>Max</td>
+							<td>5.00</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
-
-
-		<div style="border: solid 1px #ccc; padding: 15px;">
-
-			<div ng-if="view=='banana'">BANANA</div>
-
-			<div ng-if="view=='apple'">APPLE</div>
-		</div>
-
 	</body>
-</html>
+<html>

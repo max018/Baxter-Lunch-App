@@ -7,12 +7,19 @@
 	</head>
 	
 	<body class="body">
+		<div>
+				<a >Orders</a>
+				<br /><br />
+				<a ng-click="view='Students'">Students</a>
+				<br /><br />
+		</div>
+	
 		<div class="admin2container">
 			<div class="column1">
 				<div class="baxterimage">
 					<img src="http://www.jspritz.com/uploads/3/5/5/0/3550857/4144491.jpg">
 				</div>
-				<div class="sidebartext1">
+				<div class="sidebartext1" ng-click="view='Orders">
 					Orders
 				</div>
 				<div class="sidebartext2">
