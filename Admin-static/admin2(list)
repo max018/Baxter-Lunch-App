@@ -65,10 +65,10 @@
 				<div class="table1">
 					<table cellspacing="0" cellpadding="5" class="table1">
 						<tr>
-							<th>Restaurant</th>
-							<th>Name</th>
-							<th>Dish</th>
-							<th>Date</th>
+							<th class="topbarofgraph1">Restaurant</th>
+							<th class="topbarofgraph1">Name</th>
+							<th class="topbarofgraph1">Dish</th>
+							<th class="topbarofgraph1">Date</th>
 						</tr>
 						<tr>
 							<td>Zen</td>

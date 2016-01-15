@@ -1,9 +1,9 @@
 .body {
-	background-color: #243d92;
+	background-color: #ffffff;
 }
 
 .randomtext1 {
-	color: white;
+	color: #2e2728;
 	font-size: 19px;
 	font-family: 'Roboto Condensed', sans-serif;
 	padding-top: 50px;
@@ -118,13 +118,15 @@
 	border-right-style: solid;
 	border-right-color: white;
 	width: 200px;
-	height: 760px;
-	margin-right:-px;
+	height: 750px;
+	margin-right:0px;
+	background-color: #243d92;
 }
 
 .main_content {
 	width: 930px;
 	float: left;
+	padding-left: 50px;
 }
 
 .orderoverview {
@@ -156,12 +158,13 @@
 }
 
 .table, th, td {
-	border: 1px solid white;
+	border: 1px solid #2e2728;
 	text-align: center;
-	color: white;
+	color: #2e2728;
 	margin-left: -px;
 	width: 800px;
 	margin-top: 100px;
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
 .searchbar1{
@@ -183,7 +186,7 @@
 .column2{
 	width: 1000px;
 	float: left;
-	padding-left: 50px;
+	padding-left: 75px;
 }
 
 .topLeft {
@@ -205,9 +208,14 @@
 	width: 1000px;
 	margin-top: 25px;
 }
+
+.topbarofgraph1{
+	 background-color: #243d92;
+	 color: #ffffff;
+}
 -----------------------------------------------------------------------------------------------------------------------------------
-body {
-    background:#bf5c71 url('body-bg.jpg');
+.body {
+    background-color:#2e2728;
 }
  
 .clearfix:after {
@@ -247,7 +255,7 @@ body {
 .menu .arrow {
     font-size:21px;
     line-height:0%;
-	color: white;
+	color: #ff8c1a;
 	
 }
  
