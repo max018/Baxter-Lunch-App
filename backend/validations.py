@@ -35,6 +35,7 @@ class Validator:
         def wrapper(*args, **kwargs):
             res = self.run()
             return f(*args, res, **kwargs)
+        return wrapper
 
 @Validator
 def logged_in_val(data):
