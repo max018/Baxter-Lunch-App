@@ -3,132 +3,115 @@
 <head>
 <title>Order Listing</title>
 <style>
-body {
-text-align: center;
-}
+
 .space {
-background-color: white;
-width: 320px;
-height: 960px;
-padding-top: 10px;
-border: 10px solid black;
+	background-color: white;
+	width: 320px;
+	height: 480px;
+	padding-top: 10px;
+	border: 10px solid black;
 }
 body {
-color: navy;
-font-family: "Roboto Condensed";
-text-align: center;
-box-sizing: border-box;
+	color: navy;
+	font-family: "Roboto Condensed";
+	box-sizing: border-box;
 }
 .left {
-text-align: left;
-margin: 10px;
+	float: left;
+	margin: 0 10px 10px;
 }
 a:link {
     color: blue;
 	text-decoration: none;
 }
-header {
-background-color: navy;
-height: 100px;
-width: 320px;
-margin: 0px;
-color: white;
+header h3 {
+	background-color: navy;
+   padding: 10px;
+	margin: 0 auto;
+	color: white;
 }
 .right {
-float: right;
+	float: right;
+}
+.dayName {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.day p {
+	margin-top: 5px; 
 }
 </style>
-<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="space">
-<header>
-<h3>Order Listings for the week of x/xx</h3>
-</header>
-<br />
-<div class="main">
-<div class="monday">
-<div class="left">
-<h3>Monday</h3>
-<p>Your order is:</p>
-</div>
-<div class="right">
-<a href="monday.html">
-<img src="pencil.png" width="40px" height="40px">
-</a>
-</div>
-<br />
-<br />
-<br />
-<div class="clear">
-<hr>
-</div>
-
-
-<div class="monday">
-<div class="left">
-<h3>Monday</h3>
-<p>Your order is:</p>
-</div>
-<div class="right">
-<a href="monday.html">
-<img src="pencil.png" width="40px" height="40px">
-</a>
-</div>
-<br />
-<br />
-<br />
-<div class="clear">
-<hr>
-</div>
-<div class="monday">
-<div class="left">
-<h3>Monday</h3>
-<p>Your order is:</p>
-</div>
-<div class="right">
-<a href="monday.html">
-<img src="pencil.png" width="40px" height="40px">
-</a>
-</div>
-<br />
-<br />
-<br />
-<div class="clear">
-<hr>
-</div>
-<div class="monday">
-<div class="left">
-<h3>Monday</h3>
-<p>Your order is:</p>
-</div>
-<div class="right">
-<a href="monday.html">
-<img src="pencil.png" width="40px" height="40px">
-</a>
-</div>
-<br />
-<br />
-<br />
-<div class="clear">
-<hr>
-</div>
-<div class="monday">
-<div class="left">
-<h3>Monday</h3>
-<p>Your order is:</p>
-</div>
-<div class="right">
-<a href="monday.html">
-<img src="pencil.png" width="40px" height="40px">
-</a>
-</div>
-<br />
-<br />
-<br />
-<div class="clear">
-<hr>
-</div>
-</div>
+	<div class="space">
+		<header>
+			<h3>Order Listings for the week of x/xx</h3>
+		</header>
+		<br />
+		<div class="main">
+			<div class="day">
+				<div class="left">
+					<div class="dayName">Monday</div>
+					<p>Your order is:</p>
+				</div>
+				<div class="right">
+					<a href="monday.html">
+						<img src="pencil.png" width="40px" height="40px">
+					</a>
+				</div>
+				<hr style="clear: both">
+			</div>
+			<div class="day">
+				<div class="left">
+					<div class="dayName">Tuesday</div>
+					<p>Your order is:</p>
+				</div>
+				<div class="right">
+					<a href="monday.html">
+						<img src="pencil.png" width="40px" height="40px">
+					</a>
+				</div>
+				<hr style="clear: both">
+			</div>
+			<div class="day">
+				<div class="left">
+					<div class="dayName">Wendsday</div>
+					<p>Your order is:</p>
+				</div>
+				<div class="right">
+					<a href="monday.html">
+						<img src="pencil.png" width="40px" height="40px">
+					</a>
+				</div>
+				<hr style="clear: both">
+			</div>
+			<div class="day">
+				<div class="left">
+					<div class="dayName">Thursday</div>
+					<p>Your order is:</p>
+				</div>
+				<div class="right">
+					<a href="monday.html">
+						<img src="pencil.png" width="40px" height="40px">
+					</a>
+				</div>
+				<hr style="clear: both">
+			</div>
+			<div class="day">
+				<div class="left">
+					<div class="dayName">Friday</div>
+					<p>Your order is:</p>
+				</div>
+				<div class="right">
+					<a href="monday.html">
+						<img src="pencil.png" width="40px" height="40px">
+					</a>
+				</div>
+				<hr style="clear: both">
+			</div>
+		</div>
+	</div>
 </body>
 </html>
