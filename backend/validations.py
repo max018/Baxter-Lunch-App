@@ -3,6 +3,7 @@ from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
 from app import app
 
+from functools import wraps
 from oauth2client import client, crypt
 from restaurants import restaurants
 
@@ -28,6 +29,12 @@ class Validator:
             raise BadRequestJSON('invalid request structure')
         except AssertionError as e:
             raise BadRequestJSON(*e.args)
+
+    def __call__(self, f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            res = self.run()
+            return f(*args, res, **kwargs)
 
 @Validator
 def logged_in_val(data):
