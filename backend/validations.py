@@ -50,7 +50,7 @@ def logged_in_val(data):
             raise crypt.AppIdentityError("Wrong issuer.")
         if idinfo['hd'] != 'baxter-academy.org':
             raise crypt.AppIdentityError("Wrong hosted domain.")
-        return idinfo['sub']
+        return idinfo['email']
     except crypt.AppIdentityError as e:
         raise BadRequestJSON(*e.args)
 
