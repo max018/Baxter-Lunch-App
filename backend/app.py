@@ -7,12 +7,17 @@ from config import config
 
 app.config.update(config)
 
-@app.route('/order', methods=['POST'])
+@app.route('/place_order', methods=['POST'])
 @logged_in_val
 @order_val
-def order(user, order):
+def place_order(user, order):
     resp = 'placed order at {}'.format(order['restaurant'])
-    return jsonify(success=True, message=resp)
+    return jsonify(success=True, message=resp, for_=user)
+
+@app.route('/get_orders', methods=['POST'])
+@logged_in_val
+def get_orders(user):
+    return jsonify(success=True, orders=['placeholder'])
 
 @app.route('/login')
 def login():
