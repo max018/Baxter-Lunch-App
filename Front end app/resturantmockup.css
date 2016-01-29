@@ -1,21 +1,23 @@
-body {
-color: white;
-font-family: "Roboto Condensed";
-text-align: center;
-box-sizing: border-box;
-}
+
 .logo {
 height: 125px;
 border: 10px solid #887CAF;
 background-color:white;
 }
-.space {
+body {
+font-family: "Roboto Condensed";
+text-align: center;
+box-sizing: border-box;
+color: white;
 background-color: navy;
-width: 320px;
-height: 480px;
-padding-top: 10px;
-border: 10px solid black;
 
+}
+.space {
+padding-top: 10px;;
+font-size: 25px;
+}
+p {
+padding-top: 100px;
 }
 .button {
 	margin-bottom:15px;
@@ -38,4 +40,40 @@ h3 {
 }
 .selectpizza {
 	padding-top: 0px;
+}
+.confirm {
+	background-color: navy;
+}
+.left {
+	float: left;
+	margin: 0 10px 10px;
+}
+a:link {
+    color: blue;
+	text-decoration: none;
+}
+header h3 {
+	background-color: navy;
+   padding: 10px;
+	margin: 0 auto;
+	color: white;
+}
+.main {
+	background-color: white;
+	color: navy;
+}
+.loading {
+	padding-top: 100px;
+}
+.right {
+	float: right;
+	margin-right: 10px;
+}
+.dayName {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.day p {
+	margin-top: 5px; 
 }
