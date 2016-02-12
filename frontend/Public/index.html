@@ -20,15 +20,10 @@
 	</head>
 	<body ng-app="baxterApp" ng-controller="baxterCtrl">
 
-		<div style="padding: 100px">
-			<div ng-click="testView = 'DivI' ">Order Listings By Week</div>
-			<div ng-click="openOrderForm()">Conformation</div>
-			<div ng-click="testView = 'DivIII' ">Select A Meal</div>
-
-		</div>
+		
 		<br />
 
-		<div ng-if="testView == 'DivII' ">
+		<div ng-if="View == 'Confirmation' ">
 			<div class="space">
 				<div class="confirm">
 					<p>Your order has been confirmed</p>
@@ -38,7 +33,7 @@
 			</div>
 		</div>
 
-		<div ng-if="testView == 'DivI' ">
+		<div ng-if="View == 'Order Listings'">
 			<div class="space">
 				<header>
 					<h3>Order Listings for the week of x/xx</h3>
@@ -111,7 +106,7 @@
 
 		<br />
 
-		<div ng-if="testView == 'DivIII' ">
+		<div ng-if="View == 'Order' ">
 			<div class="space">
 				<div class="button">
 					<form>
@@ -154,6 +149,12 @@
 				</form>
 			</div>
 		</div>
+		
+<div style="padding: 100px">
+			<div ng-click="orderListings() ">Order Listings By Week</div>
+			<div ng-click="submitOrder()">Confirmation</div>
+			<div ng-click="order() ">Select A Meal</div>
 
+		</div>
 	</body>
 </html>

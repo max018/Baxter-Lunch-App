@@ -8,8 +8,16 @@ var app = angular.module('baxterApp', []);
 app.controller('baxterCtrl', ['$scope',
 	function($scope){
 
-		$scope.openOrderForm = function(){
-			$scope.testView = 'DivII';
+	    $scope.orderListings = function(){
+			$scope.View = 'Order Listings';
+		}
+		
+		$scope.submitOrder = function(){
+			$scope.View = 'Confirmation';
+		}
+		
+		$scope.order = function(){
+			$scope.View = 'Order';
 		}
 
 		
