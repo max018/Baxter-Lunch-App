@@ -9,7 +9,7 @@ app.controller('baxterCtrl', ['$scope',
 	function($scope){
 
 		$scope.openOrderForm = function(){
-			$scope.view = 'orderForm';
+			$scope.testView = 'DivII';
 		}
 
 		
