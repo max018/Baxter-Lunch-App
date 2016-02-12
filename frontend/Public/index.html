@@ -28,7 +28,7 @@
 				<div class="confirm">
 					<p>Your order has been confirmed</p>
 					<br />
-					<button type="button">Go back</button>
+					<button type="button"  ng-click="orderListings() ">Go back</button>
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 							<p>Your order is:</p>
 						</div>
 						<div class="right">
-							<a href="ng-click="order() "">
+							<a ng-click="order() "">
 								<img src="images/pencil.png" width="40px" height="40px">
 							</a>
 						</div>
@@ -58,7 +58,7 @@
 							<p>Your order is:</p>
 						</div>
 						<div class="right">
-							<a href="monday.html">
+							<a ng-click="order() "">
 								<img src="images/pencil.png" width="40px" height="40px">
 							</a>
 						</div>
@@ -70,7 +70,7 @@
 							<p>Your order is:</p>
 						</div>
 						<div class="right">
-							<a href="monday.html">
+							<a ng-click="order() "">
 								<img src="images/pencil.png" width="40px" height="40px">
 							</a>
 						</div>
@@ -82,7 +82,7 @@
 							<p>Your order is:</p>
 						</div>
 						<div class="right">
-							<a href="monday.html">
+							<a ng-click="order() "">
 								<img src="images/pencil.png" width="40px" height="40px">
 							</a>
 						</div>
@@ -94,10 +94,11 @@
 							<p>Your order is:</p>
 						</div>
 						<div class="right">
-							<a href="monday.html">
+							<a ng-click="order() "">
 								<img src="images/pencil.png" width="40px" height="40px">
 							</a>
 						</div>
+						<hr style="clear: both">
 					</div>
 				</div>
 			</div>
@@ -110,7 +111,7 @@
 			<div class="space">
 				<div class="button">
 					<form>
-						<button type="button">Back</button>
+						<button type="button"  ng-click="orderListings() ">Back</button>
 					</form>
 				</div>
 				
@@ -119,7 +120,7 @@
 				</div>
 				
 				<h2>Select Your Meal</h2>
-				<form>
+				<form ng-click="order() ">
 					<select>
 						<option value="2slice">2 Slices Of Pizza + Beverage</option>
 						<option value="1slice1/2salad">1 Slice Of Pizza + Half Salad</option>
@@ -145,7 +146,7 @@
 					
 					<br />
 			
-					<button type="button">Submit</button>
+					<button type="button"  ng-click="submitOrder() ">Submit</button>
 				</form>
 			</div>
 		</div>
