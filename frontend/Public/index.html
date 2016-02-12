@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 		
 		<title>Baxter Academy - Lunch App</title>
 
@@ -23,197 +23,143 @@
 </head>
 <body ng-app="baxterApp" ng-controller="baxterCtrl">
 
-<div style="padding: 100px">
-	<div ng-click="testView = 'banana' ">Show banana</div>
-	<div ng-click="testView = 'apple' ">Show Apple</div>
+	<div style="padding: 100px">
+		<div ng-click="testView = 'DivI' ">Order Listings By Week</div>
+		<div ng-click="testView = 'DivII' ">Conformation</div>
+		<div ng-click="testView = 'DivIII' ">Select A Meal</div>
 
-	<div ng-if="testView == 'banana' ">BANANANANANANA!</div>
-	<div ng-if="testView == 'apple' ">APAPAPAPAPLE!</div>
-
-</div>
+	</div>
 
 
 
-	<div class="space">
-		<header>
-			<h3>Order Listings for the week of x/xx</h3>
-		</header>
-		<br />
-		<div class="main">
+		
+	<br />
 
-			<div class="day" >
-				<div class="left">
-					<div class="dayName">Monday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
+		<div ng-if="testView == 'DivII' ">
+		
 
-
-
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Tuesday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Wendsday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Thursday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Friday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-		</div>
+		<div class="space">
+	<div class="confirm">
+	<p>Your order has been confirmed</p>
+	<br />
+				<button type="button">Go back</button>
+	</div>
+	</div>
+	</div>
 	</div>
 	<br />
-	<div class="space">
-<div class="confirm">
-<p>Your order has been confirmed</p>
-<br />
-			<button type="button">Go back</button>
-</div>
-</div>
-<br />
-<div class="space">
-		<header>
-			<h3>Order Listings for the week of x/xx</h3>
-		</header>
-		<br />
-		<div class="main">
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Monday</div>
-					<p>Your order is:</p>
+		<div ng-if="testView == 'DivI' ">
+		<div class="space">
+				<header>
+					<h3>Order Listings for the week of x/xx</h3>
+				</header>
+				<br />
+				<div class="main">
+					<div class="day">
+						<div class="left">
+							<div class="dayName">Monday</div>
+							<p>Your order is:</p>
+						</div>
+						<div class="right">
+							<a href="monday.html">
+								<img src="images/pencil.png" width="40px" height="40px">
+							</a>
+						</div>
+						<hr style="clear: both">
+					</div>
+					<div class="day">
+						<div class="left">
+							<div class="dayName">Tuesday</div>
+							<p>Your order is:</p>
+						</div>
+						<div class="right">
+							<a href="monday.html">
+								<img src="images/pencil.png" width="40px" height="40px">
+							</a>
+						</div>
+						<hr style="clear: both">
+					</div>
+					<div class="day">
+						<div class="left">
+							<div class="dayName">Wendsday</div>
+							<p>Your order is:</p>
+						</div>
+						<div class="right">
+							<a href="monday.html">
+								<img src="images/pencil.png" width="40px" height="40px">
+							</a>
+						</div>
+						<hr style="clear: both">
+					</div>
+					<div class="day">
+						<div class="left">
+							<div class="dayName">Thursday</div>
+							<p>Your order is:</p>
+						</div>
+						<div class="right">
+							<a href="monday.html">
+								<img src="images/pencil.png" width="40px" height="40px">
+							</a>
+						</div>
+						<hr style="clear: both">
+					</div>
+					<div class="day">
+						<div class="left">
+							<div class="dayName">Friday</div>
+							<p>Your order is:</p>
+						</div>
+						<div class="right">
+							<a href="monday.html">
+								<img src="images/pencil.png" width="40px" height="40px">
+							</a>
+						</div>
 				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
 			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Tuesday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Wendsday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Thursday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
-				<hr style="clear: both">
-			</div>
-			<div class="day">
-				<div class="left">
-					<div class="dayName">Friday</div>
-					<p>Your order is:</p>
-				</div>
-				<div class="right">
-					<a href="monday.html">
-						<img src="images/pencil.png" width="40px" height="40px">
-					</a>
-				</div>
 		</div>
+		</div>
+		<br />
+<div ng-if="testView == 'DivIII' ">
+		<div class="space">
+			<div class="button">
+			<form>
+			<button type="button">Back</button>
+			</form>
+			</div>
+			
+			<div class="logo">
+			<img src="images/imageedit_1_4737630043.gif" width="250px" height="150px"></img>
+			</div>
+			
+			<h2>Select Your Meal</h2>
+			<form>
+			 <select>
+			<option value="2slice">2 Slices Of Pizza + Beverage</option>
+			<option value="1slice1/2salad">1 Slice Of Pizza + Half Salad</option>
+			<option value="salad">Full Salad + Beverage</option>
+			</select>
+			
+			<h3>Select Your Pizza</h3>
+			<select>
+			<option value="cheese">Cheese</option>
+			<option value="pep">Pepperoni</option>
+			<option value="neast">Noreaster</option>
+			<option value="great">Great Diamond</option>
+			<option value="ship">Shipyard</option>
+			</select>
+			
+			<h3>Select Your Salad</h3>
+			<div id="selectpadding">
+			<select>
+			<option value="garden">Garden Salad</option>
+			<option value="ceaser">Ceaser Salad</option>
+			</select>
+			</div>
+		<br />
+		
+			<button type="button">Submit</button>
+			</form>
+			</div>
 	</div>
-	<br />
-<div class="space">
-<div class="button">
-<form>
-<button type="button">Back</button>
-</form>
-</div>
-<div class="logo">
-<img src="images/imageedit_1_4737630043.gif" width="250px" height="150px"></img>
-</div>
-<h2>Select Your Meal</h2>
-<form>
- <select>
-<option value="2slice">2 Slices Of Pizza + Beverage</option>
-<option value="1slice1/2salad">1 Slice Of Pizza + Half Salad</option>
-<option value="salad">Full Salad + Beverage</option>
-</select>
-<h3>Select Your Pizza</h3>
-<select>
-<option value="cheese">Cheese</option>
-<option value="pep">Pepperoni</option>
-<option value="neast">Noreaster</option>
-<option value="great">Great Diamond</option>
-<option value="ship">Shipyard</option>
-</select>
-<h3>Select Your Salad</h3>
-<div id="selectpadding">
-<select>
-<option value="garden">Garden Salad</option>
-<option value="ceaser">Ceaser Salad</option>
-</select>
-</div>
-<br />
-<button type="button">Submit</button>
-</form>
-</div>
+
 </body>
 </html>
