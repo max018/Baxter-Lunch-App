@@ -26,6 +26,16 @@ var days = [
 	},	
 ];
 
-console.log(days)
+console.log(days);
+
+var monday = days[0];
+
+var tuesday = days[1];
+
+console.log(monday);
+
+console.log(monday.order);
+
+console.log(monday.order.restaurant + ' - ' + monday.order.option)
 
 
