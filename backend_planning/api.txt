@@ -1,0 +1,14 @@
+all endpoints must pass a "token" key for auth.
+all return values have a "success" key.
+if "success" is false, the return value will have a "message" key.
+
+user endpoints:
+- endpoint: /place_order
+  args: {"week_offset": int, "day": int, "order": order} # see order.json
+  return: {"message": string}
+- endpoint: /get_week
+  args: {"week_offset": int}
+  return: [{"holiday": string, "order": order}] (5 elements)
+- endpoint: /cancel_order
+  args: {"week_offset": int, "day": int}
+

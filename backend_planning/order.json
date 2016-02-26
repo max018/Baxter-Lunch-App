@@ -1,0 +1,14 @@
+{
+	"restaurant": "Zen Chinese Bistro",
+	"option": "Pork Fried Rice"
+}
+
+{
+	"restaurant": "Portland Pie",
+	"meal": "2 Slices",
+	"choices": {
+		"pizza": ["Cheese", "Cheese"],
+		"salad": []
+	}
+}
+
