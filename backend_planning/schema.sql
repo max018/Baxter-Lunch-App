@@ -1,19 +1,11 @@
-CREATE TABLE users (
-    userid          serial PRIMARY KEY,
-    username        citext,
-    firstname       text,
-    lastname        text,
-    UNIQUE          username
-);
-
 CREATE TABLE orders (
     orderid         serial PRIMARY KEY,
-    username        citext,
+    userid          integer,
     day             date,
     price           money,
     restaurant      citext,
     order           jsonb,
-    UNIQUE          (username, day)
+    UNIQUE          (userid, day)
 );
 
 CREATE TABLE days (

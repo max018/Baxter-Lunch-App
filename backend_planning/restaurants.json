@@ -1,0 +1,58 @@
+{
+	"Portland Pie":{
+		"simple":false,
+		"groups":{
+			"pizza":[
+				"Cheese",
+				"Pepperoni",
+				"Shipyard",
+				"Great Diamond",
+				"Noreaster"
+			],
+			"salad":[
+				"Garden",
+				"Caesar"
+			]
+		},
+		"meals":{
+			"2 Slices":{
+				"pizza":2,
+				"salad":0
+			},
+			"1 Slice, 1 Half Salad":{
+				"pizza":1,
+				"salad":1
+			},
+			"Full Salad":{
+				"pizza":0,
+				"salad":1
+			}
+		}
+	},
+	"b.good":{
+		"simple":true,
+		"options":[
+			"Chicken Caesar Salad",
+			"Southwestern Chicken Salad",
+			"Avocado and Orange Salad",
+			"Veggie Burger",
+			"Chicken Sandwich",
+			"Beef Burger",
+			"Turkey Burger"
+		]
+	},
+	"Zen Chinese Bistro":{
+		"simple":true,
+		"options":[
+			"Chicken Lo Mein",
+			"Pork Fried Rice"
+		]
+	},
+	"Kamasouptra":{
+		"simple":true,
+		"options":[
+			"Soup"
+		]
+	}
+}
+
