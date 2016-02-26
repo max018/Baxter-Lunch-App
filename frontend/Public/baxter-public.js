@@ -17,13 +17,22 @@ app.controller('baxterCtrl', ['$scope',
 		$scope.submitOrder = function(){
 			$scope.View = 'Confirmation';
 		}
-		
-		$scope.order = function(){
-			$scope.View = 'Order';
-		}
 
 		$scope.restChoose = function(){
 			$scope.View = 'Rest';
+		}
+		$scope.order = function(){
+			$scope.View = 'Order';
+		}
+		$scope.orderZen = function(){
+			$scope.View = 'OrderZen';
+		}
+		$scope.orderKama = function(){
+			$scope.View = 'OrderKama';
+			
+		$scope.orderB = function(){
+			$scope.View = 'OrderB';
+		}
 		}
 	}
 ]);
