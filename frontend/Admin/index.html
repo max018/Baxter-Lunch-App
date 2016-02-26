@@ -23,16 +23,17 @@
 				<div class="sidebartext1" ng-click="view='Orders'">
 					Orders
 				</div>
-				<div class="sidebartext2" ng-click="view='Students'">
+				<div class="sidebartext2" ng-click="loadView('Students')">
 					Students
 				</div>
 				
 			</div>
+						
 			<div class="column2" ng-if="view=='Orders'">
 				
 					<div class="topLeft">
 						<div class="randomtext1">
-							Search order here...
+							Search name here...
 						</div>
 						<div class="box">
 							<div class="container-1">
@@ -156,8 +157,8 @@
 							<th class="topbarofgraph1">Name</th>
 							<th class="topbarofgraph1">Balance Due</th>
 						</tr>
-						<tr>
-							<td>Max</td>
+						<tr >
+							<td ng-click="loadView('Max')">Max</td>
 							<td>5.00</td>
 						</tr>
 						<tr>
@@ -198,6 +199,78 @@
 						</tr>
 					</table>
 				</div>
+			</div>
+				<div class="table2" ng-if="view=='Max'">
+					<div class="randomtext3" style="
+						padding-left: 75px;
+						padding-top: 45;">
+						Search date of order here...
+					</div>
+					<div class="box">
+						<div class="container-1">
+							<span class="icon"><i class="fa fa-search"></i></span>
+							<input class="searchbar1" type="search" id="search" placeholder="Search..." style="
+								margin-left: 75px;"/>
+						</div>
+					</div>
+				<table cellspacing="0" cellpadding="5" class="table2" style="
+					padding-left: 75px;
+					padding-top: 50px;">
+						<th class="topbarofgraph1">Date</th>
+						<th class="topbarofgraph1">Dish Ordered</th>
+						<th class="topbarofgraph1">Transaction</th>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+					<tr>
+						<td>11-11-11</td>
+						<td>Lo Mein</td>
+						<td>-$5</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</body>

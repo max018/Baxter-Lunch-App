@@ -9,6 +9,22 @@
 	padding-top: 50px;
 }
 
+.randomtext3 {
+	color: #2e2728;
+	font-size: 19px;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top: 45px;
+}
+
+.randomtext2 {
+	color: #2e2728;
+	font-size: 36px;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top: 10px;
+	margin-left: 200px;
+	padding-left: 35px;
+}
+
 .logintext {
 	margin-top: 5px;
 	margin-left: 5px;
@@ -168,7 +184,7 @@
 }
 
 .searchbar1{
-		margin-top: 10px;
+		margin-top: 25px;
 }
 
 .table0{
@@ -205,13 +221,22 @@
 .table1 {
 	float: right;
 	width: 1000px;
-	margin-top: 25px;
+	padding-top: 25px;
+}
+
+.table2 {
+	float: left;
+	width: 1000px;
+	margin-left: 0px;
+	margin-top: 7px;
 }
 
 .topbarofgraph1{
 	 background-color: #243d92;
 	 color: white;
 }
+
+
 -----------------------------------------------------------------------------------------------------------------------------------
 .body {
     background-color:#2e2728;
@@ -283,7 +308,7 @@
 }
  
 .sub-menu {
-    width:160%;
+    width:100%;
     padding:5px 0px;
     position:absolute;
     top:100%;
