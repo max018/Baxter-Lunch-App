@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="baxterlunchapp-admin.css">
+	</head>
+	
+	<body class="body">
+			<div class="admin2container">
+				<div class="column1">
+					<div class="baxterimage">
+						<img src="http://www.jspritz.com/uploads/3/5/5/0/3550857/4144491.jpg">
+					</div>
+					<div class="sidebartext1" ng-click="view='Orders'">
+						Orders
+					</div>
+					<div class="sidebartext2" ng-click="loadView('Students')">
+						Students
+					</div>
+				</div>
+				<div class="column2">
+					<div class="form1">
+						<div class="randomtext4">
+							<label class="label">
+									Date
+								<input type="text" name="fdate">
+							</label>
+						</div>
+						<div class="randomtext4">
+							<label class="label">
+									Amount
+								<input type="text" name="famount">
+							</label>
+						</div>
+						<div class="randomtext4">
+							<label class="label"> 
+									Note
+								<input type="text" name="fnote">
+							</label>
+						</div>
+							<button class="button" type="button" onclick="alert('You have sucessfully recorded an order')">Click to Record Payment</button>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

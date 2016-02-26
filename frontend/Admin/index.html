@@ -212,6 +212,9 @@
 							<input class="searchbar1" type="search" id="search" placeholder="Search..." style="
 								margin-left: 75px;"/>
 						</div>
+							<div class="randomdiv" ng-click="loadView('Record another order')">
+								Record a payment
+						</div>
 					</div>
 				<table cellspacing="0" cellpadding="5" class="table2" style="
 					padding-left: 75px;
@@ -271,6 +274,30 @@
 						<td>-$5</td>
 					</tr>
 				</table>
+		</div>
+				<div class="admin2container" ng-if="view=='Record another order'">
+				<div class="column2">
+					<div class="form1">
+						<div class="randomtext4">
+							<label class="label">
+									Date
+								<input type="text" name="fdate">
+							</label>
+						</div>
+						<div class="randomtext4">
+							<label class="label">
+									Amount
+								<input type="text" name="famount">
+							</label>
+						</div>
+						<div class="randomtext4">
+							<label class="label"> 
+									Note
+								<input type="text" name="fnote">
+							</label>
+						</div>
+							<button class="button" type="button" onclick="alert('You have sucessfully recorded an order')">Click to Record Payment</button>
+				</div>
 			</div>
 		</div>
 	</body>

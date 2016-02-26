@@ -9,12 +9,6 @@
 	padding-top: 50px;
 }
 
-.randomtext3 {
-	color: #2e2728;
-	font-size: 19px;
-	font-family: 'Roboto Condensed', sans-serif;
-	padding-top: 45px;
-}
 
 .randomtext2 {
 	color: #2e2728;
@@ -24,6 +18,56 @@
 	margin-left: 200px;
 	padding-left: 35px;
 }
+
+.randomtext3 {
+	color: #2e2728;
+	font-size: 19px;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top: 45px;
+}
+
+.randomtext4 {
+	color: #2e2728;
+	font-size: 19px;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top: 50px;
+	padding-left: 30px;
+}
+
+.button {
+	margin-top: 50px;
+	margin-left: 20px;
+	padding: 20px;
+	background-color: #ff3300;
+	font-size: 16px;
+	color: white;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.label {
+	display: block;
+	text-align: left;
+	width: 200px;
+
+}
+
+.form1 {
+	padding-left: 330px;
+}
+
+.randomdiv {
+	color: #2e2728;
+	font-size: 19px;
+	font-family: 'Roboto Condensed', sans-serif;
+	float: right;
+	display: block;
+}
+
+.form1 {
+	margin-top: 100px;
+	width: 300px;
+}
+
 
 .logintext {
 	margin-top: 5px;
