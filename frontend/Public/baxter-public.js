@@ -22,6 +22,8 @@ app.controller('baxterCtrl', ['$scope',
 			$scope.View = 'Order';
 		}
 
-		
+		$scope.restChoose = function(){
+			$scope.View = 'Rest';
+		}
 	}
 ]);
