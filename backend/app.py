@@ -1,3 +1,4 @@
+from psycopg2.extras import Json
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from config import config
@@ -6,14 +7,30 @@ app = Flask(__name__)
 app.config.update(config)
 db = SQLAlchemy(app)
 
-from validations import logged_in_val, order_val
+from validations import logged_in_val, edit_date_val, order_val
 
 @app.route('/place_order', methods=['POST'])
 @logged_in_val
+@edit_date_val
 @order_val
-def place_order(user, order):
+def place_order(user, date, order):
+    # TODO: proper upsert
+    data = {'userid': user['studentid'], 'day': date, 'price': 5,
+            'restaurant': order['restaurant'], 'order_data': Json(order)}
+    e_query = 'SELECT orderid FROM orders'\
+        ' WHERE userid = %(userid)s AND day = %(day)s;'
+    existing = db.engine.execute(e_query, data).first()
+    if existing:
+        data['orderid'] = existing['orderid']
+        query = 'UPDATE orders SET '\
+            'price = %(price)s, restaurant = %(restaurant)s, order_data = %(order_data)s'\
+            ' WHERE orderid = %(orderid)s;'
+    else:
+        query = 'INSERT INTO orders VALUES (DEFAULT, '\
+            '%(userid)s, %(day)s, %(price)s, %(restaurant)s, %(order_data)s);'
+    db.engine.execute(query, data)
     resp = 'placed order at {}'.format(order['restaurant'])
-    return jsonify(success=True, message=resp, for_=user)
+    return jsonify(success=True, message=resp)
 
 @app.route('/get_orders', methods=['POST'])
 @logged_in_val
