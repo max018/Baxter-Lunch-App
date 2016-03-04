@@ -1,7 +1,7 @@
 from flask import abort, request
 from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
-from app import app
+from app import app, db
 
 from functools import wraps
 from oauth2client import client, crypt
@@ -48,9 +48,12 @@ def logged_in_val(data):
         idinfo = client.verify_id_token(token, app.config['CLIENT_ID'])
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise crypt.AppIdentityError("Wrong issuer.")
-        if idinfo['hd'] != 'baxter-academy.org':
-            raise crypt.AppIdentityError("Wrong hosted domain.")
-        return idinfo['email']
+
+        email = idinfo['email']
+        query = 'SELECT * FROM students WHERE email = %s;'
+        student = db.engine.execute(query, email).first()
+        assert student is not None, 'unknown student'
+        return student
     except crypt.AppIdentityError as e:
         raise BadRequestJSON(*e.args)
 

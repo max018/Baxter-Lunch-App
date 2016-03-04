@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
-
-app = Flask(__name__)
-
-from validations import logged_in_val, order_val
+from flask_sqlalchemy import SQLAlchemy
 from config import config
 
+app = Flask(__name__)
 app.config.update(config)
+db = SQLAlchemy(app)
+
+from validations import logged_in_val, order_val
 
 @app.route('/place_order', methods=['POST'])
 @logged_in_val
