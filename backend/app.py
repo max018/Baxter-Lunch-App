@@ -8,6 +8,7 @@ app.config.update(config)
 db = SQLAlchemy(app)
 
 from validations import logged_in_val, edit_date_val, order_val
+from errors import BadRequestJSON
 
 @app.route('/place_order', methods=['POST'])
 @logged_in_val
@@ -31,6 +32,19 @@ def place_order(user, date, order):
     db.engine.execute(query, data)
     resp = 'placed order at {}'.format(order['restaurant'])
     return jsonify(success=True, message=resp)
+
+@app.route('/cancel_order', methods=['POST'])
+@logged_in_val
+@edit_date_val
+def cancel_order(user, date):
+    # TODO: proper upsert
+    data = {'userid': user['studentid'], 'day': date}
+    query = 'DELETE FROM orders WHERE userid = %(userid)s AND day = %(day)s;'
+    res = db.engine.execute(query, data)
+    if res.rowcount:
+        return jsonify(success=True, message='deleted order')
+    else:
+        raise BadRequestJSON('no such order')
 
 @app.route('/get_orders', methods=['POST'])
 @logged_in_val
