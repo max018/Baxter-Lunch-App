@@ -26,16 +26,21 @@ var days = [
 	},	
 ];
 
-console.log(days);
 
-var monday = days[0];
+var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-var tuesday = days[1];
+for(var i = 0; i  < days.length; i++){
 
-console.log(monday);
+	var day = days[i];
 
-console.log(monday.order);
+	var dayName = dayNames[i];
 
-console.log(monday.order.restaurant + ' - ' + monday.order.option)
+	if(day.order){
+		console.log(dayName + ": " + day.order.restaurant + ' - ' + day.order.option)
+	}
 
+	if(day.holiday != null){
+		console.log(dayName + ": " + day.holiday)	
+	}
 
+}
