@@ -2,6 +2,7 @@ from flask import abort, request
 from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
 from app import app, db
+import datetime
 
 from functools import wraps
 from oauth2client import client, crypt
@@ -66,6 +67,19 @@ def logged_in_val(data):
         return student
     except crypt.AppIdentityError as e:
         raise BadRequestJSON(*e.args)
+
+@Validator
+def edit_date_val(data):
+    # TODO: check the days table
+    week, day = data['week_offset'], data['day']
+    assert_type(week, int)
+    assert_type(day, int)
+    assert 1 <= week <= 5, 'week of order out of range'
+    assert 0 <= day <= 4, 'nonexistent day of the week'
+    today = datetime.date.today()
+    delta = datetime.timedelta(weeks=week, days=day)
+    delta -= datetime.timedelta(today.weekday())
+    return today + delta
 
 @Validator.with_key('order')
 def order_val(data):
