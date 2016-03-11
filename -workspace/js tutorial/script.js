@@ -19,7 +19,7 @@ var days = [
 			"restaurant": "Portland Pie",
 			"option": "Pizza: Cheese, Cheese"
 		}
-	},	
+	},	 
 
 	{	"holiday": null, 
 		"order": null
@@ -27,20 +27,30 @@ var days = [
 ];
 
 
-var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-for(var i = 0; i  < days.length; i++){
 
-	var day = days[i];
-
-	var dayName = dayNames[i];
-
-	if(day.order){
-		console.log(dayName + ": " + day.order.restaurant + ' - ' + day.order.option)
-	}
-
-	if(day.holiday != null){
-		console.log(dayName + ": " + day.holiday)	
-	}
-
+for(var index = 0; index < days.length; index++){
+	days[index].holiday = "summer vacation";
 }
+
+console.log(days);
+
+
+
+// var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+// for(var i = 0; i  < days.length; i++){
+
+// 	var day = days[i];
+
+// 	var dayName = dayNames[i];
+
+// 	if(day.order){
+// 		console.log(dayName + ": " + day.order.restaurant + ' - ' + day.order.option)
+// 	}
+
+// 	if(day.holiday != null){
+// 		console.log(dayName + ": " + day.holiday)	
+// 	}
+
+// }
