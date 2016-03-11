@@ -9,7 +9,7 @@ from oauth2client import client, crypt
 from restaurants import restaurants
 
 def assert_type(v, t):
-    assert isinstance(v, t), '{} is not a {}'.format(v, t.__name__)
+    assert isinstance(v, t), '{!r} is not a {}'.format(v, t.__name__)
 
 class Validator:
     @classmethod
@@ -70,16 +70,22 @@ def logged_in_val(data):
 
 @Validator
 def edit_date_val(data):
-    # TODO: check the days table
     week, day = data['week_offset'], data['day']
     assert_type(week, int)
     assert_type(day, int)
     assert 1 <= week <= 5, 'week of order out of range'
     assert 0 <= day <= 4, 'nonexistent day of the week'
+
     today = datetime.date.today()
     delta = datetime.timedelta(weeks=week, days=day)
     delta -= datetime.timedelta(today.weekday())
-    return today + delta
+    date = today + delta
+
+    query = 'SELECT holiday FROM days WHERE day = %s;'
+    holiday = db.engine.execute(query, date).first()
+    assert holiday is None, 'no lunch on date given'
+
+    return date
 
 @Validator.with_key('order')
 def order_val(data):
