@@ -1,17 +1,17 @@
 CREATE TABLE orders (
     orderid         serial PRIMARY KEY,
-    userid          integer,
+    studentid       integer REFERENCES students,
     day             date,
     price           money,
     restaurant      citext,
-    order           jsonb,
-    UNIQUE          (userid, day)
+    order_data      jsonb,
+    UNIQUE          (studentid, day)
 );
 
 CREATE TABLE days (
     dayid           serial PRIMARY KEY,
     day             date,
     holiday         text,
-    UNIQUE          day
+    UNIQUE          (day)
 );
 

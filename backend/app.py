@@ -15,11 +15,11 @@ from errors import BadRequestJSON
 @logged_in_val
 @edit_date_val
 @order_val
-def place_order(user, date, order):
-    data = {'userid': user['studentid'], 'day': date, 'price': 5,
+def place_order(student, date, order):
+    data = {'studentid': student['studentid'], 'day': date, 'price': 5,
             'restaurant': order['restaurant'], 'order_data': Json(order)}
     query = 'INSERT INTO orders VALUES (DEFAULT, '\
-        '%(userid)s, %(day)s, %(price)s, %(restaurant)s, %(order_data)s);'
+        '%(studentid)s, %(day)s, %(price)s, %(restaurant)s, %(order_data)s);'
     try:
         db.engine.execute(query, data)
         resp = 'placed order at {}'.format(order['restaurant'])
@@ -30,9 +30,10 @@ def place_order(user, date, order):
 @app.route('/cancel_order', methods=['POST'])
 @logged_in_val
 @edit_date_val
-def cancel_order(user, date):
-    data = {'userid': user['studentid'], 'day': date}
-    query = 'DELETE FROM orders WHERE userid = %(userid)s AND day = %(day)s;'
+def cancel_order(student, date):
+    data = {'studentid': student['studentid'], 'day': date}
+    query = 'DELETE FROM orders'\
+        ' WHERE studentid = %(studentid)s AND day = %(day)s;'
     res = db.engine.execute(query, data)
     if res.rowcount:
         return jsonify(success=True, message='deleted order')
@@ -42,12 +43,12 @@ def cancel_order(user, date):
 @app.route('/get_orders', methods=['POST'])
 @logged_in_val
 @get_week_val
-def get_orders(user, week):
-    data = {'userid': user['studentid'], 'week': week}
+def get_orders(student, week):
+    data = {'studentid': student['studentid'], 'week': week}
     query = 'SELECT o.order_data AS order, d.holiday'\
             ' FROM unnest(%(week)s) AS r (day)'\
                 ' LEFT JOIN'\
-                    ' (SELECT * FROM orders WHERE userid = %(userid)s)'\
+                    ' (SELECT * FROM orders WHERE studentid = %(studentid)s)'\
                     ' AS o USING (day)'\
                 ' LEFT JOIN days AS d USING (day)'\
                 ' ORDER BY day;'
