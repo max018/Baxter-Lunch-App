@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config.update(config)
 db = SQLAlchemy(app)
 
-from validations import logged_in_val, edit_date_val, order_val
+from validations import logged_in_val, edit_date_val, order_val, get_week_val
 from errors import BadRequestJSON
 
 @app.route('/place_order', methods=['POST'])
@@ -48,8 +48,19 @@ def cancel_order(user, date):
 
 @app.route('/get_orders', methods=['POST'])
 @logged_in_val
-def get_orders(user):
-    return jsonify(success=True, orders=['placeholder'])
+@get_week_val
+def get_orders(user, week):
+    data = {'userid': user['studentid'], 'week': week}
+    query = 'SELECT o.order_data AS order, d.holiday'\
+            ' FROM unnest(%(week)s) AS r (day)'\
+                ' LEFT JOIN'\
+                    ' (SELECT * FROM orders WHERE userid = %(userid)s)'\
+                    ' AS o USING (day)'\
+                ' LEFT JOIN days AS d USING (day)'\
+                ' ORDER BY day;'
+    res = db.engine.execute(query, data).fetchall()
+    res = list(map(dict, res))
+    return jsonify(success=True, days=res)
 
 @app.route('/login')
 def login():
@@ -67,5 +78,5 @@ function onSignIn(googleUser) {{
 }}
 </script>
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    """.format(config['CLIENT_ID'])
+    """.format(app.config['CLIENT_ID'])
 

@@ -70,14 +70,15 @@ def logged_in_val(data):
 
 @Validator
 def edit_date_val(data):
-    week, day = data['week_offset'], data['day']
-    assert_type(week, int)
+    week_offset, day = data['week_offset'], data['day']
+    assert_type(week_offset, int)
     assert_type(day, int)
-    assert 1 <= week <= 5, 'week of order out of range'
+    min, max = app.config['MIN_WEEKS_EDIT'], app.config['MAX_WEEKS']
+    assert min <= week_offset <= max, 'week of order out of range'
     assert 0 <= day <= 4, 'nonexistent day of the week'
 
     today = datetime.date.today()
-    delta = datetime.timedelta(weeks=week, days=day)
+    delta = datetime.timedelta(weeks=week_offset, days=day)
     delta -= datetime.timedelta(today.weekday())
     date = today + delta
 
@@ -102,4 +103,19 @@ def order_val(data):
             group_options = restaurant['groups'][group]
             assert all(item in group_options for item in group_choices),\
                     'nonexistent item chosen in group {!r}'.format(group)
+
+@Validator
+def get_week_val(data):
+    week_offset = data['week_offset']
+    assert_type(week_offset, int)
+    min, max = app.config['MIN_WEEKS_GET'], app.config['MAX_WEEKS']
+    assert min <= week_offset <= max, 'week out of range'
+
+    today = datetime.date.today()
+    delta = datetime.timedelta(weeks=week_offset)
+    delta -= datetime.timedelta(today.weekday())
+    first = today + delta
+
+    week = [first + datetime.timedelta(days=n) for n in range(5)]
+    return week
 
