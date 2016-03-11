@@ -1,3 +1,4 @@
+from sqlalchemy.exc import IntegrityError
 from psycopg2.extras import Json
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -15,29 +16,21 @@ from errors import BadRequestJSON
 @edit_date_val
 @order_val
 def place_order(user, date, order):
-    # TODO: proper upsert
     data = {'userid': user['studentid'], 'day': date, 'price': 5,
             'restaurant': order['restaurant'], 'order_data': Json(order)}
-    e_query = 'SELECT orderid FROM orders'\
-        ' WHERE userid = %(userid)s AND day = %(day)s;'
-    existing = db.engine.execute(e_query, data).first()
-    if existing:
-        data['orderid'] = existing['orderid']
-        query = 'UPDATE orders SET '\
-            'price = %(price)s, restaurant = %(restaurant)s, order_data = %(order_data)s'\
-            ' WHERE orderid = %(orderid)s;'
-    else:
-        query = 'INSERT INTO orders VALUES (DEFAULT, '\
-            '%(userid)s, %(day)s, %(price)s, %(restaurant)s, %(order_data)s);'
-    db.engine.execute(query, data)
-    resp = 'placed order at {}'.format(order['restaurant'])
-    return jsonify(success=True, message=resp)
+    query = 'INSERT INTO orders VALUES (DEFAULT, '\
+        '%(userid)s, %(day)s, %(price)s, %(restaurant)s, %(order_data)s);'
+    try:
+        db.engine.execute(query, data)
+        resp = 'placed order at {}'.format(order['restaurant'])
+        return jsonify(success=True, message=resp)
+    except IntegrityError:
+        raise BadRequestJSON('conflicting order exists')
 
 @app.route('/cancel_order', methods=['POST'])
 @logged_in_val
 @edit_date_val
 def cancel_order(user, date):
-    # TODO: proper upsert
     data = {'userid': user['studentid'], 'day': date}
     query = 'DELETE FROM orders WHERE userid = %(userid)s AND day = %(day)s;'
     res = db.engine.execute(query, data)
