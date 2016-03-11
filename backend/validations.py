@@ -1,31 +1,36 @@
 from flask import abort, request
 from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
-from app import app
+from app import app, db
+import datetime
 
 from functools import wraps
 from oauth2client import client, crypt
 from restaurants import restaurants
 
 def assert_type(v, t):
-    assert isinstance(v, t), '{} is not a {}'.format(v, t.__name__)
+    assert isinstance(v, t), '{!r} is not a {}'.format(v, t.__name__)
 
 class Validator:
-    def __init__(self, val):
-        self.val = val
+    @classmethod
+    def with_key(cls, key):
+        def wrapper(val):
+            return cls(val, key=key)
+        return wrapper
 
-    def run(self):
+    def __init__(self, val, key=None):
+        self.val = val
+        self.key = key
+
+    def run(self, data):
         try:
-            data = request.get_json()
-            if data is None:
-                raise BadRequestJSON('not a JSON request')
+            if self.key is not None:
+                data = data[self.key]
             result = self.val(data)
             if result is None:
                 return data
             else:
                 return result
-        except BadRequest as e:
-            raise BadRequestJSON('malformed JSON')
         except KeyError as e:
             raise BadRequestJSON('missing key: {!r}'.format(e.args[0]))
         except TypeError as e:
@@ -36,25 +41,54 @@ class Validator:
     def __call__(self, f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            res = self.run()
+            try:
+                data = request.get_json()
+                if data is None:
+                    raise BadRequestJSON('not a JSON request')
+                res = self.run(data)
+            except BadRequest as e:
+                raise BadRequestJSON('malformed JSON')
             return f(*args, res, **kwargs)
         return wrapper
 
-@Validator
+@Validator.with_key('token')
 def logged_in_val(data):
     try:
-        assert_type(data['token'], str)
-        token = bytes(data['token'], 'utf-8')
+        assert_type(data, str)
+        token = bytes(data, 'utf-8')
         idinfo = client.verify_id_token(token, app.config['CLIENT_ID'])
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise crypt.AppIdentityError("Wrong issuer.")
-        if idinfo['hd'] != 'baxter-academy.org':
-            raise crypt.AppIdentityError("Wrong hosted domain.")
-        return idinfo['email']
+
+        email = idinfo['email']
+        query = 'SELECT * FROM students WHERE email = %s;'
+        student = db.engine.execute(query, email).first()
+        assert student is not None, 'unknown student'
+        return student
     except crypt.AppIdentityError as e:
         raise BadRequestJSON(*e.args)
 
 @Validator
+def edit_date_val(data):
+    week_offset, day = data['week_offset'], data['day']
+    assert_type(week_offset, int)
+    assert_type(day, int)
+    min, max = app.config['MIN_WEEKS_EDIT'], app.config['MAX_WEEKS']
+    assert min <= week_offset <= max, 'week of order out of range'
+    assert 0 <= day <= 4, 'nonexistent day of the week'
+
+    today = datetime.date.today()
+    delta = datetime.timedelta(weeks=week_offset, days=day)
+    delta -= datetime.timedelta(today.weekday())
+    date = today + delta
+
+    query = 'SELECT holiday FROM days WHERE day = %s;'
+    holiday = db.engine.execute(query, date).first()
+    assert holiday is None, 'no lunch on date given'
+
+    return date
+
+@Validator.with_key('order')
 def order_val(data):
     assert data['restaurant'] in restaurants, 'no such restaurant'
     restaurant = restaurants[data['restaurant']]
@@ -69,4 +103,19 @@ def order_val(data):
             group_options = restaurant['groups'][group]
             assert all(item in group_options for item in group_choices),\
                     'nonexistent item chosen in group {!r}'.format(group)
+
+@Validator
+def get_week_val(data):
+    week_offset = data['week_offset']
+    assert_type(week_offset, int)
+    min, max = app.config['MIN_WEEKS_GET'], app.config['MAX_WEEKS']
+    assert min <= week_offset <= max, 'week out of range'
+
+    today = datetime.date.today()
+    delta = datetime.timedelta(weeks=week_offset)
+    delta -= datetime.timedelta(today.weekday())
+    first = today + delta
+
+    week = [first + datetime.timedelta(days=n) for n in range(5)]
+    return week
 
