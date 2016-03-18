@@ -12,28 +12,41 @@ app.controller('tutorialCtrl', ['$scope',
 			$scope.view = viewName;
 		}
 		
+		$scope.loadView = function(viewAge){
+			$scope.view = viewAge;
+		}
 
-		$scope.studentsList = ['max','simon', 'ben'];
+
+		$scope.studentsList = ['Max','Simon', 'Ben'];
+
+		$scope.studentOrder = ['Lo Mein','Burger','Hotdog']; 
+		
+		$scope.studentAge = ['Fifiteen','Sixteen','Seventeen'];
 
 		$scope.students = [
 			{
-				first_name : 'max',
-				last_name : 'coury',
+				first_name : 'Max',
+				last_name : 'Coury',
+				age : 15,
 				grade : 10,
-				hobby: 'soccer'
+				hobby: 'Soccer',
+				order: 'Lo Mein',
 			},
 
 			{
-				first_name : 'ben',
-				last_name : 'r-f',
+				first_name : 'Ben',
+				last_name : 'R-F',
+				age : 17,
 				grade : 12,
-				hobby: 'coding'
+				hobby: 'Coding',
+				order: 'Burger',
 			}
 
 		];
 
 		console.log($scope.studentsList);
 
+		console.log($scope.studentAge);
 
 		console.log($scope.students);
 		

@@ -23,6 +23,16 @@
 			<div ng-repeat="student in studentsList">{{student}}</div>
 		</div>
 
+		<div class="studentOrder">
+			<b>STUDENT ORDER</b><br />
+			<div ng-repeat="order in studentOrder">{{order}}</div>
+		</div>
+		
+		<div class="studentAge">
+			<b>STUDENT AGE</b><br />
+			<div ng-repeat="age in studentAge">{{age}}</div>
+		</div>
+		
 		<br /><br /><br /><br /><br /><br />
 
 		<div class="studentRoster">
@@ -32,6 +42,7 @@
 				<div class="name"><b>{{student.first_name}} {{student.last_name}}</b></div>
 				<div class="grade"><i>Grade: {{student.grade}}</i></div>
 				<div class="hobby"><i>Hobby: {{student.hobby}}</i></div>
+				<div class="order"><i>Order: {{student.order}}</i></div>
 			</div>
 		</div>
 
