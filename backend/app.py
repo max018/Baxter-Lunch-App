@@ -42,10 +42,10 @@ def cancel_order(student, date):
     else:
         raise BadRequestJSON('no such order')
 
-@app.route('/get_orders', methods=['POST'])
+@app.route('/get_week', methods=['POST'])
 @logged_in_val
 @get_week_val
-def get_orders(student, week):
+def get_week(student, week):
     data = {'studentid': student['studentid'], 'week': week}
     query = 'SELECT o.order_data AS order, d.holiday'\
             ' FROM unnest(%(week)s) AS r (day)'\
