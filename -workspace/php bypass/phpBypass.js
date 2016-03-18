@@ -2,10 +2,10 @@
 
 
 
-var app = angular.module('phpBypassApp', [ 'ui.bootstrap', 'LocalStorageModule']);
+var app = angular.module('phpBypassApp', [ 'LocalStorageModule']);
 
-app.controller('phpBypassCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window', '$modal', 'localStorageService',
-	function($scope, $http, $sce, $rootScope, $window, $modal, localStorageService){
+app.controller('phpBypassCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window', 'localStorageService',
+	function($scope, $http, $sce, $rootScope, $window, localStorageService){
 		
 		var testData = ['apple', 'banana', 'pineapple'];
 
@@ -33,25 +33,34 @@ app.controller('phpBypassCtrl', ['$scope', '$http', '$sce', '$rootScope', '$wind
 		******************************************************/
 	
 		$scope.callAPI = function(request, varName, callback){
-			var api_path = 'php_bypass.php';
+			var api_path = 'http://local.baxter-academy.org:5000/get_orders';
+
+			var request = {
+				token : 'maximillian.coury@baxter-academy.org',
+				week_offset : 0
+			}
+
+
 			$http.post(api_path, request).then(
 				function(response){
 
-					var payLoad = response.data;
+					console.log(response)
 
-					// update list of keys in cookie
-					var keys = localStorageService.get('keys');
-					if(!keys) keys = [];
-					if($.inArray(varName, keys) == -1){
-						keys.push(varName);
-					} 
-					localStorageService.set('keys', keys);
+					// var payLoad = response.data;
 
-					// save response data in cookie
-					localStorageService.set(varName, payLoad);
+					// // update list of keys in cookie
+					// var keys = localStorageService.get('keys');
+					// if(!keys) keys = [];
+					// if($.inArray(varName, keys) == -1){
+					// 	keys.push(varName);
+					// } 
+					// localStorageService.set('keys', keys);
 
-					// load into scope
-					$scope[varName] = payLoad;
+					// // save response data in cookie
+					// localStorageService.set(varName, payLoad);
+
+					// // load into scope
+					// $scope[varName] = payLoad;
 				}
 			);
 		}

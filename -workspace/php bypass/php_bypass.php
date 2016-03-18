@@ -1,6 +1,6 @@
 <?php
 	
-	$url = 'http://127.0.0.1/cmty/_baxter/lunch_repo/-workspace/php%20bypass/relay.php';
+	$url = 'http://local.baxter-academy.org/';
 
 	$data_string = file_get_contents('php://input');
 
