@@ -2,11 +2,13 @@ from sqlalchemy.exc import IntegrityError
 from psycopg2.extras import Json
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask.ext.cors import CORS
 from config import config
 
 app = Flask(__name__)
 app.config.update(config)
 db = SQLAlchemy(app)
+CORS(app)
 
 from validations import logged_in_val, edit_date_val, order_val, get_week_val
 from errors import BadRequestJSON
