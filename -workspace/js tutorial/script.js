@@ -26,7 +26,30 @@ var days = [
 	},	
 ];
 
+for(var index = 0; index < 5; index++){
+	days[index].holiday = null,
 
+<<<<<<< HEAD
+};
+
+
+// var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+// for(var i = 0; i  < days.length; i++){
+
+// 	var day = days[i];
+
+// 	var dayName = dayNames[i];
+
+// 	if(day.order){
+// 		console.log(dayName + ": " + day.order.restaurant + ' - ' + day.order.option)
+// 	}
+
+// 	if(day.holiday != null){
+// 		console.log(dayName + ": " + day.holiday)	
+// 	}
+
+=======
 
 var thursday = days[3]
 
@@ -55,4 +78,5 @@ console.log(days);
 // 		console.log(dayName + ": " + day.holiday)	
 // 	}
 
+>>>>>>> e79f6ebb3bf73a107b4909945ad6dfb70ce0bb95
 // }
