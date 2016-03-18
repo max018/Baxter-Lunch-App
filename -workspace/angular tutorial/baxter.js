@@ -15,6 +15,13 @@ app.controller('tutorialCtrl', ['$scope',
 
 		$scope.studentsList = ['max','simon', 'ben'];
 
+		$scope.studentsList = {
+			0 : 'max',
+			1 : 'simon', 
+			2 : 'ben'
+		};
+
+
 		$scope.students = [
 			{
 				first_name : 'max',
@@ -32,10 +39,10 @@ app.controller('tutorialCtrl', ['$scope',
 
 		];
 
-		console.log($scope.studentsList);
+		// console.log($scope.studentsList);
 
 
-		console.log($scope.students);
+		// console.log($scope.students);
 		
 
 

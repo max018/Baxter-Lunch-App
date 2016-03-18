@@ -28,6 +28,8 @@ var days = [
 
 
 
+var thursday = days[3]
+
 
 for(var index = 0; index < days.length; index++){
 	days[index].holiday = "summer vacation";

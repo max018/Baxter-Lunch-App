@@ -15,8 +15,9 @@
 	</head>
 	
 	<body class="body" ng-app="tutorialApp" ng-controller="tutorialCtrl">
-			
-
+		
+	
+ 
 
 		<div class="studentList">
 			<b>STUDENT LIST</b><br />
@@ -28,6 +29,7 @@
 		<div class="studentRoster">
 			<b>STUDENT ROSTER</b><br />
 			<div ng-repeat="student in students">
+
 				<br /><br />
 				<div class="name"><b>{{student.first_name}} {{student.last_name}}</b></div>
 				<div class="grade"><i>Grade: {{student.grade}}</i></div>
