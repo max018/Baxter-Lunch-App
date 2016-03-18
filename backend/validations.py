@@ -51,8 +51,7 @@ class Validator:
             return f(*args + (res,), **kwargs)
         return wrapper
 
-@Validator.with_key('token')
-def logged_in_val(data):
+def verify_token(data):
     try:
         assert_type(data, str)
         token = bytes(data, 'utf-8')
@@ -61,12 +60,22 @@ def logged_in_val(data):
             raise crypt.AppIdentityError("Wrong issuer.")
 
         email = idinfo['email']
-        query = 'SELECT * FROM students WHERE email = %s;'
-        student = db.engine.execute(query, email).first()
-        assert student is not None, 'unknown student'
-        return student
+        return email
     except crypt.AppIdentityError as e:
         raise BadRequestJSON(*e.args)
+
+@Validator.with_key('token')
+def logged_in_val(data):
+    email = verify_token(data)
+    query = 'SELECT * FROM students WHERE email = %s;'
+    student = db.engine.execute(query, email).first()
+    assert student is not None, 'unknown student'
+    return student
+
+@Validator.with_key('token')
+def admin_val(data):
+    email = verify_token(data)
+    assert email == app.config['ADMIN'], 'not an admin'
 
 @Validator
 def edit_date_val(data):
@@ -104,9 +113,8 @@ def order_val(data):
             assert all(item in group_options for item in group_choices),\
                     'nonexistent item chosen in group {!r}'.format(group)
 
-@Validator
-def get_week_val(data):
-    week_offset = data['week_offset']
+@Validator.with_key('week_offset')
+def get_week_val(week_offset):
     assert_type(week_offset, int)
     min, max = app.config['MIN_WEEKS_GET'], app.config['MAX_WEEKS']
     assert min <= week_offset <= max, 'week out of range'
@@ -118,4 +126,20 @@ def get_week_val(data):
 
     week = [first + datetime.timedelta(days=n) for n in range(5)]
     return week
+
+@Validator.with_key('offset')
+def offset_val(offset):
+    assert_type(offset, int)
+    assert offset >= 0, 'negative offset'
+
+@Validator.with_key('restaurant')
+def restaurant_val(restaurant):
+    if restaurant is None:
+        return False
+    assert_type(restaurant, str)
+    for r in restaurants.keys():
+        if restaurant.lower() in r.lower():
+            return r
+    else:
+        raise BadRequestJSON('no such restaurant')
 
