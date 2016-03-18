@@ -26,11 +26,11 @@ class Validator:
         try:
             if self.key is not None:
                 data = data[self.key]
-            result = self.val(data)
-            if result is None:
+            res = self.val(data)
+            if res is None:
                 return data
             else:
-                return result
+                return res
         except KeyError as e:
             raise BadRequestJSON('missing key: {!r}'.format(e.args[0]))
         except TypeError as e:
@@ -48,7 +48,7 @@ class Validator:
                 res = self.run(data)
             except BadRequest as e:
                 raise BadRequestJSON('malformed JSON')
-            return f(*args, res, **kwargs)
+            return f(*args + (res,), **kwargs)
         return wrapper
 
 @Validator.with_key('token')
