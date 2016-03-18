@@ -26,21 +26,26 @@ var days = [
 	},	
 ];
 
+for(var index = 0; index < 5; index++){
+	days[index].holiday = null,
 
-var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+};
 
-for(var i = 0; i  < days.length; i++){
 
-	var day = days[i];
+// var dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-	var dayName = dayNames[i];
+// for(var i = 0; i  < days.length; i++){
 
-	if(day.order){
-		console.log(dayName + ": " + day.order.restaurant + ' - ' + day.order.option)
-	}
+// 	var day = days[i];
 
-	if(day.holiday != null){
-		console.log(dayName + ": " + day.holiday)	
-	}
+// 	var dayName = dayNames[i];
 
-}
+// 	if(day.order){
+// 		console.log(dayName + ": " + day.order.restaurant + ' - ' + day.order.option)
+// 	}
+
+// 	if(day.holiday != null){
+// 		console.log(dayName + ": " + day.holiday)	
+// 	}
+
+// }
