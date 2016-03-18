@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="baxterlunchapp-admin.css">
+		
 		<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,10 +11,29 @@
 
 
 		<!-- BAXTER JS -->
-		<script src="tutorial.js"></script>		
+		<script src="baxter.js"></script>		
 	</head>
 	
 	<body class="body" ng-app="tutorialApp" ng-controller="tutorialCtrl">
 			
+
+
+		<div class="studentList">
+			<b>STUDENT LIST</b><br />
+			<div ng-repeat="student in studentsList">{{student}}</div>
+		</div>
+
+		<br /><br /><br /><br /><br /><br />
+
+		<div class="studentRoster">
+			<b>STUDENT ROSTER</b><br />
+			<div ng-repeat="student in students">
+				<br /><br />
+				<div class="name"><b>{{student.first_name}} {{student.last_name}}</b></div>
+				<div class="grade"><i>Grade: {{student.grade}}</i></div>
+				<div class="hobby"><i>Hobby: {{student.hobby}}</i></div>
+			</div>
+		</div>
+
 	</body>
 <html>
