@@ -2,6 +2,7 @@ from flask import abort, request
 from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
 from app import app, db
+from week import Week
 import datetime
 
 from functools import wraps
@@ -84,12 +85,9 @@ def edit_date_val(data):
     assert_type(day, int)
     min, max = app.config['MIN_WEEKS_EDIT'], app.config['MAX_WEEKS']
     assert min <= week_offset <= max, 'week of order out of range'
-    assert 0 <= day <= 4, 'nonexistent day of the week'
 
-    today = datetime.date.today()
-    delta = datetime.timedelta(weeks=week_offset, days=day)
-    delta -= datetime.timedelta(today.weekday())
-    date = today + delta
+    week = Week.from_offset(week_offset)
+    date = week.day(day)
 
     query = 'SELECT holiday FROM days WHERE day = %s;'
     holiday = db.engine.execute(query, date).first()
@@ -119,12 +117,7 @@ def get_week_val(week_offset):
     min, max = app.config['MIN_WEEKS_GET'], app.config['MAX_WEEKS']
     assert min <= week_offset <= max, 'week out of range'
 
-    today = datetime.date.today()
-    delta = datetime.timedelta(weeks=week_offset)
-    delta -= datetime.timedelta(today.weekday())
-    first = today + delta
-
-    week = [first + datetime.timedelta(days=n) for n in range(5)]
+    week = Week.from_offset(week_offset)
     return week
 
 @Validator.with_key('offset')

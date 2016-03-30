@@ -48,7 +48,7 @@ def cancel_order(student, date):
 @logged_in_val
 @get_week_val
 def get_week(student, week):
-    data = {'studentid': student['studentid'], 'week': week}
+    data = {'studentid': student['studentid'], 'week': week.days()}
     query = 'SELECT o.order_data AS order, d.holiday'\
         ' FROM unnest(%(week)s) AS r (day)'\
             ' LEFT JOIN'\
