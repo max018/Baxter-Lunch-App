@@ -52,6 +52,12 @@ class Validator:
             return f(*args + (res,), **kwargs)
         return wrapper
 
+def adjusted_min_edit():
+    min = app.config['MIN_WEEKS_EDIT']
+    if datetime.date.today().weekday() >= 4:
+        min += 1
+    return min
+
 def verify_token(data):
     if app.debug:
         return data
@@ -85,9 +91,7 @@ def edit_date_val(data):
     week_offset, day = data['week_offset'], data['day']
     assert_type(week_offset, int)
     assert_type(day, int)
-    min, max = app.config['MIN_WEEKS_EDIT'], app.config['MAX_WEEKS']
-    if datetime.date.today().weekday() >= 4:
-        min += 1
+    min, max = adjusted_min_edit(), app.config['MAX_WEEKS']
     assert min <= week_offset <= max, 'week of order out of range'
 
     week = Week.from_offset(week_offset)

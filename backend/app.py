@@ -12,6 +12,7 @@ CORS(app)
 
 from validations import *
 from errors import BadRequestJSON
+from week import Week
 
 # student endpoints
 
@@ -67,9 +68,12 @@ def get_week(student, week):
 @restaurant_val
 @offset_val
 def get_orders(admin, restaurant, offset):
-    data = {'restaurant': restaurant, 'offset': offset}
+    cutoff_offset = adjusted_min_edit()
+    cutoff = Week.from_offset(cutoff_offset).day(0)
+    data = {'restaurant': restaurant, 'offset': offset, 'cutoff': cutoff}
     query = 'SELECT * FROM orders LEFT JOIN students USING (studentid)'\
-        + (' WHERE restaurant = %(restaurant)s' if restaurant else '') +\
+        + ' WHERE day < %(cutoff)s'\
+        + (' AND restaurant = %(restaurant)s' if restaurant else '') +\
         ' ORDER BY day DESC LIMIT 20 OFFSET %(offset)s;'
     res = db.engine.execute(query, data).fetchall()
     res = list(map(dict, res))
