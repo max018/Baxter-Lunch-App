@@ -86,6 +86,8 @@ def edit_date_val(data):
     assert_type(week_offset, int)
     assert_type(day, int)
     min, max = app.config['MIN_WEEKS_EDIT'], app.config['MAX_WEEKS']
+    if datetime.date.today().weekday() >= 4:
+        min += 1
     assert min <= week_offset <= max, 'week of order out of range'
 
     week = Week.from_offset(week_offset)
