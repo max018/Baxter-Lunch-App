@@ -33,6 +33,6 @@ for order in orders:
     table.append(row)
 
 sname = "Lunch Orders: Week of {}".format(next_week.day(0))
-args = [sname, table, [config.config['ADMIN']]]
+args = [sname, table, config.config['ADMIN']]
 aw.call(config.config['SCRIPT_ID'], 'newOrderSheet', args)
 
