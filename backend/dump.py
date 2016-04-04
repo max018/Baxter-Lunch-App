@@ -3,9 +3,11 @@ import config
 import sqlalchemy
 import week
 
+HEADER = ['Name', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
 def summarize_order(order_data):
     if 'option' in order_data:
-        return order_data['option']
+        pick = order_data['option']
     else:
         choices = []
         for g, cs in order_data['choices'].items():
@@ -14,23 +16,41 @@ def summarize_order(order_data):
                 choices.append("{}: {}".format(g, s_cs))
         s_choices = '; '.join(choices)
         meal = order_data['meal']
-        return "{} ({})".format(meal, s_choices)
+        pick = "{} ({})".format(meal, s_choices)
+
+    restaurant = order_data['restaurant']
+    return "{}: {}".format(restaurant, pick)
+
 
 next_week = week.Week.from_offset(1)
-days = next_week.days()
 eng = sqlalchemy.create_engine(config.config['SQLALCHEMY_DATABASE_URI'])
 
-query = 'SELECT * FROM orders LEFT JOIN students USING (studentid)'\
-    ' WHERE day = ANY (%(days)s);'
-orders = eng.execute(query, days=days).fetchall()
+# this is probably awful
+query =\
+    'SELECT firstname, lastname, '\
+        'json_object_agg(day, order_data) AS week_map'\
+    ' FROM orders LEFT JOIN students USING (studentid)'\
+    ' WHERE day = ANY (%(days)s)'\
+    ' GROUP BY (firstname, lastname);'
+days = next_week.days()
+students = eng.execute(query, days=days).fetchall()
 
-table = []
-for order in orders:
-    name = order['firstname'] + ' ' + order['lastname']
-    day = str(order['day'])
-    restaurant = order['restaurant']
-    s_order = summarize_order(order['order_data'])
-    row = [name, day, restaurant, s_order]
+table = [HEADER]
+for student in students:
+    week_map = student['week_map']
+    if not week_map:
+        continue
+
+    name = student['firstname'] + ' ' + student['lastname']
+    row = [name]
+
+    for day in map(str, days):
+        if day not in week_map:
+            row.append(None)
+        else:
+            order_data = week_map[day]
+            s_order = summarize_order(order_data)
+            row.append(s_order)
 
     table.append(row)
 
