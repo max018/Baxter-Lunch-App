@@ -3,6 +3,19 @@ import config
 import sqlalchemy
 import week
 
+def summarize_order(order_data):
+    if 'option' in order_data:
+        return order_data['option']
+    else:
+        choices = []
+        for g, cs in order_data['choices'].items():
+            if cs:
+                s_cs = ', '.join(cs)
+                choices.append("{}: {}".format(g, s_cs))
+        s_choices = '; '.join(choices)
+        meal = order_data['meal']
+        return "{} ({})".format(meal, s_choices)
+
 next_week = week.Week.from_offset(1)
 days = next_week.days()
 eng = sqlalchemy.create_engine(config.config['SQLALCHEMY_DATABASE_URI'])
@@ -15,20 +28,9 @@ table = []
 for order in orders:
     name = order['firstname'] + ' ' + order['lastname']
     day = str(order['day'])
-    price = order['price']
     restaurant = order['restaurant']
-    row = [name, day, price, restaurant]
-
-    data = order['order_data']
-    if 'option' in data:
-        row.append(data['option'])
-    else:
-        row.append(data['meal'])
-        choices = []
-        for g, cs in data['choices'].items():
-            if cs:
-                choices.append("{}: {}".format(g, ', '.join(cs)))
-        row.append('; '.join(choices))
+    s_order = summarize_order(order['order_data'])
+    row = [name, day, restaurant, s_order]
 
     table.append(row)
 
