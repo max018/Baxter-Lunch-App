@@ -3,7 +3,13 @@ import config
 import sqlalchemy
 import week
 
-HEADER = ['Name', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+WEEKDAYS = 'Monday Tuesday Wednesday Thursday Friday'.split()
+def header_for(week):
+    header = ['Name']
+    for name, date in zip(WEEKDAYS, week.days()):
+        col_heading = "{} ({})".format(name, date)
+        header.append(col_heading)
+    return header
 
 def summarize_order(order_data):
     if 'option' in order_data:
@@ -35,7 +41,7 @@ query =\
 days = next_week.days()
 students = eng.execute(query, days=days).fetchall()
 
-table = [HEADER]
+table = [header_for(next_week)]
 for student in students:
     week_map = student['week_map']
     if not week_map:
