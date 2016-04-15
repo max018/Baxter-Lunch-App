@@ -3,12 +3,67 @@ all return values have a "success" key.
 if "success" is false, the return value will have a "message" key.
 
 user endpoints:
+
+
+ENDPOINT: PLACE_ORDER
+--------------------------------
 - endpoint: /place_order
-  args: {"week_offset": int, "day": int, "order": order} # see order.json
-  return: {"message": string}
+  
+{
+  	"week_offset" : int, 
+  	"day" : int, 
+  	"order" : {
+		"restaurant": string,
+		"option": string
+	}
+} 
+
+
+
+# see order.json
+return: {"message": string}
+
+
+
+
+{
+  	"week_offset" : int, 
+  	"day" : int, 
+  	"order" : {
+		"restaurant": string,
+		"meal": string,
+		"choices": {
+			"pizza": [string, string],
+			"salad": []
+		}
+	}
+} 
+
+ 
+
+
+
+
+ENDPOINT: GET_WEEK
+-------------------
 - endpoint: /get_week
-  args: {"week_offset": int}
-  return: [{"holiday": string, "order": order}] (5 elements)
+  args: {
+  	"week_offset": int
+  }
+
+
+  return: [
+  	{
+  		"holiday": string, 
+  		"order": order
+  	},
+  	... (5 elements)
+  ] 
+
+
+
+
+
 - endpoint: /cancel_order
   args: {"week_offset": int, "day": int}
 
