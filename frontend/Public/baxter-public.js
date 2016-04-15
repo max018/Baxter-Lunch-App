@@ -103,7 +103,7 @@ app.controller('baxterCtrl', ['$scope',
 
 
 
-		$scope.View = 'Order';
+		$scope.View = 'Order Listings';
 	
 	    $scope.orderListings = function(){
 			$scope.View = 'Order Listings';
