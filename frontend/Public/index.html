@@ -20,9 +20,9 @@
 	</head>
 	<body ng-app="baxterApp" ng-controller="baxterCtrl">
 
-		
-		<br />
 
+
+safsdf
 		<div ng-if="View == 'Confirmation' ">
 			<div class="space">
 				<div class="confirm">
@@ -40,77 +40,67 @@
 				</header>
 				<br />
 				<div class="main">
-					<div class="day">
-					<div class="monday">
+					
+					<div class="day" ng-repeat='(dayIndex, day) in days'>
 						<div class="left">
+							<div class="dayName">{{dayNames[dayIndex]}}</div>
+							<p ng-if="day.holiday">Holiday: {{day.holiday}}</p>
 							
-								<div class="dayName">Monday</div>
-									<p>Your order is:</p>
-								</div>
-						<div class="right">
-							<a ng-click="restChoose() ">
-								<img src="images/pencil.png" width="40px" height="40px">
+							<p ng-if="day.order">
+								{{day.order.option}} - {{day.order.restaurant}}
+							</p>
+
+						</div>
+						<div class="right" ng-if="day.holiday == null">
+
+							<!-- CREATE ORDER LINK -->
+							<a ng-click="startOrder(dayIndex) " ng-if="day.order == null">
+								<img src="images/pencil.png" width="40px" height="40px" >
 							</a>
-						</div>
-						<hr style="clear: both">
-					</div>
-					</div>
-					<div class="day">
-						<div class="left">
-							<div class="dayName">Tuesday</div>
-							<p>Your order is:</p>
-						</div>
-						<div class="right">
-							<a ng-click="restChoose() ">
-								<img src="images/pencil.png" width="40px" height="40px">
+
+							<!-- CANCEL ORDER LINK -->
+							<a ng-click="cancelOrder() " ng-if="day.order">
+								<img src="https://cdn4.iconfinder.com/data/icons/geomicons/32/672366-x-128.png" width="30px" height="30px" margin-top="10px">
 							</a>
+
+
 						</div>
-						<hr style="clear: both">
-					</div>
-					<div class="day">
-						<div class="left">
-							<div class="dayName">Wendsday</div>
-							<p>Your order is:</p>
-						</div>
-						<div class="right">
-							<a ng-click="restChoose() ">
-								<img src="images/pencil.png" width="40px" height="40px">
-							</a>
-						</div>
-						<hr style="clear: both">
-					</div>
-					<div class="day">
-						<div class="left">
-							<div class="dayName">Thursday</div>
-							<p>Your order is:</p>
-						</div>
-						<div class="right">
-							<a ng-click="restChoose() ">
-								<img src="images/pencil.png" width="40px" height="40px">
-							</a>
-						</div>
-						<hr style="clear: both">
-					</div>
-					<div class="day">
-						<div class="left">
-							<div class="dayName">Friday</div>
-							<p>Your order is:</p>
-						</div>
-						<div class="right">
-							<a ng-click="restChoose() ">
-								<img src="images/pencil.png" width="40px" height="40px">
-							</a>
-						</div>
-						<hr style="clear: both">
-					</div>
+						<hr style="clear: both" />
+					</div>	
+
+
+
+
 				</div>
 			</div>
 		</div>
 
+		<div ng-if="View == 'ChooseRestaurant' ">
+			<div class="space">
+				<div class="button">
+					<form>
+						<button type="button"  ng-click="orderListings() ">Back</button>
+					</form>
+				</div>
+				<h1>Choose a Resturaunt:</h1>
+				<br />
+				<div class="left1">
+				
 
-		<br />
+					<div class="restaruants" ng-repeat='restaurant in restaurants'>
+						<div class="restaurant">{{ restaurant.title }}</div>
+					</div>
+				
+				
+				
+				</div>
+			</div>
+        </div>
 
-		<div ng-if="View == 'Order' ">
+
+		<div>
+
+		asdfasd
 			<div class="space">
 				<div class="button">
 					<form>
@@ -155,27 +145,7 @@
 		</div>
 		
 		
-		<div ng-if="View == 'Rest' ">
-			<div class="space">
-				<div class="button">
-					<form>
-						<button type="button"  ng-click="orderListings() ">Back</button>
-					</form>
-				</div>
-				<h1>Choose a Resturaunt:</h1>
-				<br />
-				<div class="left1">
-				
-				<h2 ng-click="order('Pie') ">Portland Pie</h2>
-				<h2 ng-click="order('Zen') ">Zen Chinese Bistro</h2>
-				<h2 ng-click="order('Kama'>) ">Kamasouptra</h2>
-				<h2 ng-click="order('B') ">B.good</h2>
-				</a>
-				
-				
-				
-				</div>
-        </div>
+		
 		
 	</body>
 </html>
