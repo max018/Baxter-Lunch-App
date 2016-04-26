@@ -82,8 +82,11 @@
 				<div class="left1">
 				
 
-					<div class="restaruants" ng-repeat='restaurant in restaurants'>
-						<div class="restaurant">{{ restaurant.title }}</div>
+					<div class="restaurants" >
+						<div  ng-repeat='restaurant in restaurants'
+							class="restaurant" ng-click="clickRestaurant(restaurant)" >
+								{{ restaurant.title }}
+						</div>
 					</div>
 				
 				

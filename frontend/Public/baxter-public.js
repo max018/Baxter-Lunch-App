@@ -81,7 +81,7 @@ app.controller('baxterCtrl', ['$scope',
 				}
 			},
 
-			{	"holiday": "New Year's Eve", 
+			{	 
 				"order": null
 			},
 
@@ -102,6 +102,34 @@ app.controller('baxterCtrl', ['$scope',
 		];
 
 
+		$scope.exampleOrder = {
+		  	"week_offset" : 0, 
+		  	"day" : 1, 
+		  	"order" : {
+				"restaurant": "b.good",
+				"option": "Burger",
+			}
+		}
+		console.log($scope.exampleOrder)
+
+		
+		$scope.newOrder = {
+			"week_offset" : 0, 
+		  	"day" : null, 
+		  	"order" : {
+				"restaurant": "",
+				"option": "",
+			}
+		};
+		
+
+		$scope.View = "Order Listings";
+		console.log($scope.newOrder)
+
+
+
+		
+		
 
 		$scope.View = 'Order Listings';
 	
@@ -110,9 +138,22 @@ app.controller('baxterCtrl', ['$scope',
 		}
 
 		$scope.startOrder = function(day){
-			console.log(day)
+			$scope.newOrder.day = day;
+			console.log($scope.newOrder)
 			$scope.View = 'ChooseRestaurant';
 		}
+
+
+
+		$scope.clickRestaurant = function(restaurant){
+			$scope.newOrder.order.restaurant = restaurant.title;
+			$scope.current_restaurant = restaurant;
+			console.log($scope.newOrder)
+			$scope.View = 'ChooseRestaurant';
+		}
+
+
+
 		
 		$scope.submitOrder = function(){
 			$scope.View = 'Confirmation';
