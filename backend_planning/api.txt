@@ -67,3 +67,8 @@ ENDPOINT: GET_WEEK
 - endpoint: /cancel_order
   args: {"week_offset": int, "day": int}
 
+office endpoints:
+- endpoint: /get_orders
+  args: {"offset": int, "restaurant": string}
+  return: [{studentid, orderid, day, price, restaurant, order_data, firstname, lastname, email}] (up to 20 elements)
+

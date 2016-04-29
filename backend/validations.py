@@ -2,6 +2,7 @@ from flask import abort, request
 from werkzeug.exceptions import BadRequest
 from errors import BadRequestJSON
 from app import app, db
+from week import Week
 import datetime
 
 from functools import wraps
@@ -26,11 +27,11 @@ class Validator:
         try:
             if self.key is not None:
                 data = data[self.key]
-            result = self.val(data)
-            if result is None:
+            res = self.val(data)
+            if res is None:
                 return data
             else:
-                return result
+                return res
         except KeyError as e:
             raise BadRequestJSON('missing key: {!r}'.format(e.args[0]))
         except TypeError as e:
@@ -48,11 +49,18 @@ class Validator:
                 res = self.run(data)
             except BadRequest as e:
                 raise BadRequestJSON('malformed JSON')
-            return f(*args, res, **kwargs)
+            return f(*args + (res,), **kwargs)
         return wrapper
 
-@Validator.with_key('token')
-def logged_in_val(data):
+def adjusted_min_edit():
+    min = app.config['MIN_WEEKS_EDIT']
+    if datetime.date.today().weekday() >= 4:
+        min += 1
+    return min
+
+def verify_token(data):
+    if app.config.get('TRUST_AUTH', None) == "I'MCERTAIN":
+        return data
     try:
         assert_type(data, str)
         token = bytes(data, 'utf-8')
@@ -61,26 +69,33 @@ def logged_in_val(data):
             raise crypt.AppIdentityError("Wrong issuer.")
 
         email = idinfo['email']
-        query = 'SELECT * FROM students WHERE email = %s;'
-        student = db.engine.execute(query, email).first()
-        assert student is not None, 'unknown student'
-        return student
+        return email
     except crypt.AppIdentityError as e:
         raise BadRequestJSON(*e.args)
+
+@Validator.with_key('token')
+def logged_in_val(data):
+    email = verify_token(data)
+    query = 'SELECT * FROM students WHERE email = %s;'
+    student = db.engine.execute(query, email).first()
+    assert student is not None, 'unknown student'
+    return student
+
+@Validator.with_key('token')
+def admin_val(data):
+    email = verify_token(data)
+    assert email == app.config['ADMIN'], 'not an admin'
 
 @Validator
 def edit_date_val(data):
     week_offset, day = data['week_offset'], data['day']
     assert_type(week_offset, int)
     assert_type(day, int)
-    min, max = app.config['MIN_WEEKS_EDIT'], app.config['MAX_WEEKS']
+    min, max = adjusted_min_edit(), app.config['MAX_WEEKS']
     assert min <= week_offset <= max, 'week of order out of range'
-    assert 0 <= day <= 4, 'nonexistent day of the week'
 
-    today = datetime.date.today()
-    delta = datetime.timedelta(weeks=week_offset, days=day)
-    delta -= datetime.timedelta(today.weekday())
-    date = today + delta
+    week = Week.from_offset(week_offset)
+    date = week.day(day)
 
     query = 'SELECT holiday FROM days WHERE day = %s;'
     holiday = db.engine.execute(query, date).first()
@@ -104,18 +119,28 @@ def order_val(data):
             assert all(item in group_options for item in group_choices),\
                     'nonexistent item chosen in group {!r}'.format(group)
 
-@Validator
-def get_week_val(data):
-    week_offset = data['week_offset']
+@Validator.with_key('week_offset')
+def get_week_val(week_offset):
     assert_type(week_offset, int)
     min, max = app.config['MIN_WEEKS_GET'], app.config['MAX_WEEKS']
     assert min <= week_offset <= max, 'week out of range'
 
-    today = datetime.date.today()
-    delta = datetime.timedelta(weeks=week_offset)
-    delta -= datetime.timedelta(today.weekday())
-    first = today + delta
-
-    week = [first + datetime.timedelta(days=n) for n in range(5)]
+    week = Week.from_offset(week_offset)
     return week
+
+@Validator.with_key('offset')
+def offset_val(offset):
+    assert_type(offset, int)
+    assert offset >= 0, 'negative offset'
+
+@Validator.with_key('restaurant')
+def restaurant_val(restaurant):
+    if restaurant is None:
+        return False
+    assert_type(restaurant, str)
+    for r in restaurants.keys():
+        if restaurant.lower() in r.lower():
+            return r
+    else:
+        raise BadRequestJSON('no such restaurant')
 

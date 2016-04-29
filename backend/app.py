@@ -2,14 +2,19 @@ from sqlalchemy.exc import IntegrityError
 from psycopg2.extras import Json
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask.ext.cors import CORS
 from config import config
 
 app = Flask(__name__)
 app.config.update(config)
 db = SQLAlchemy(app)
+CORS(app)
 
-from validations import logged_in_val, edit_date_val, order_val, get_week_val
+from validations import *
 from errors import BadRequestJSON
+from week import Week
+
+# student endpoints
 
 @app.route('/place_order', methods=['POST'])
 @logged_in_val
@@ -40,19 +45,39 @@ def cancel_order(student, date):
     else:
         raise BadRequestJSON('no such order')
 
-@app.route('/get_orders', methods=['POST'])
+@app.route('/get_week', methods=['POST'])
 @logged_in_val
 @get_week_val
-def get_orders(student, week):
-    data = {'studentid': student['studentid'], 'week': week}
+def get_week(student, week):
+    data = {'studentid': student['studentid'], 'week': week.days()}
     query = 'SELECT o.order_data AS order, d.holiday'\
-            ' FROM unnest(%(week)s) AS r (day)'\
-                ' LEFT JOIN'\
-                    ' (SELECT * FROM orders WHERE studentid = %(studentid)s)'\
-                    ' AS o USING (day)'\
-                ' LEFT JOIN days AS d USING (day)'\
-                ' ORDER BY day;'
+        ' FROM unnest(%(week)s) AS r (day)'\
+            ' LEFT JOIN'\
+                ' (SELECT * FROM orders WHERE studentid = %(studentid)s)'\
+                ' AS o USING (day)'\
+            ' LEFT JOIN days AS d USING (day)'\
+            ' ORDER BY day ASC;'
     res = db.engine.execute(query, data).fetchall()
     res = list(map(dict, res))
     return jsonify(success=True, days=res)
+
+# admin endpoints
+
+@app.route('/get_orders', methods=['POST'])
+@admin_val
+@restaurant_val
+@offset_val
+def get_orders(admin, restaurant, offset):
+    cutoff_offset = adjusted_min_edit()
+    cutoff = Week.from_offset(cutoff_offset).day(0)
+    data = {'restaurant': restaurant, 'offset': offset, 'cutoff': cutoff}
+    query = 'SELECT * FROM orders LEFT JOIN students USING (studentid)'\
+        + ' WHERE day < %(cutoff)s'\
+        + (' AND restaurant = %(restaurant)s' if restaurant else '') +\
+        ' ORDER BY day DESC LIMIT 20 OFFSET %(offset)s;'
+    res = db.engine.execute(query, data).fetchall()
+    res = list(map(dict, res))
+    for row in res:
+        row['day'] = str(row['day'])
+    return jsonify(success=True, orders=res)
 
