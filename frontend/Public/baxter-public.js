@@ -73,6 +73,8 @@ app.controller('baxterCtrl', ['$scope',
 		console.log($scope.restaurants)
 
 
+		console.log($scope.orderRecord);
+
 		$scope.days = [
 			{	"holiday": null, 
 				"order": {
@@ -102,6 +104,7 @@ app.controller('baxterCtrl', ['$scope',
 		];
 
 
+
 		$scope.exampleOrder = {
 		  	"week_offset" : 0, 
 		  	"day" : 1, 
@@ -113,6 +116,9 @@ app.controller('baxterCtrl', ['$scope',
 		console.log($scope.exampleOrder)
 
 		
+		
+
+
 		$scope.newOrder = {
 			"week_offset" : 0, 
 		  	"day" : null, 
@@ -146,11 +152,15 @@ app.controller('baxterCtrl', ['$scope',
 
 
 		$scope.clickRestaurant = function(restaurant){
-			$scope.newOrder.order.restaurant = restaurant.title;
+
 			$scope.current_restaurant = restaurant;
+
+
+			$scope.newOrder.order.restaurant = restaurant.title;
 			console.log($scope.newOrder)
-			$scope.View = 'ChooseRestaurant';
+			$scope.View = 'orderRecord';
 		}
+
 
 
 
@@ -176,5 +186,4 @@ app.controller('baxterCtrl', ['$scope',
 		$scope.orderB = function(){
 			$scope.View = 'OrderB';
 		}
-	}
-]);
+	}]);
