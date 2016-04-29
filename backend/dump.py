@@ -37,7 +37,7 @@ query =\
         'json_object_agg(day, order_data) AS week_map'\
     ' FROM orders LEFT JOIN students USING (studentid)'\
     ' WHERE day = ANY (%(days)s)'\
-    ' GROUP BY (firstname, lastname);'
+    ' GROUP BY firstname, lastname;'
 days = next_week.days()
 students = eng.execute(query, days=days).fetchall()
 
