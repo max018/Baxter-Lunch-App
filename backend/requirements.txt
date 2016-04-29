@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+Flask-SQLAlchemy
+oauth2client
+psycopg2
+google-api-python-client
