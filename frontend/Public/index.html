@@ -16,6 +16,26 @@
 		<!-- BAXTER LUNCH APP -->
 		<script src="baxter-public.js"></script>	
 		<link href='baxter-public.css' rel='stylesheet' type='text/css'>
+
+		  <!-- copy-pastable section begins -->
+    <meta name="google-signin-scope" content="profile email">
+    <script src="id.js"></script>
+    <script>
+      var googleAuth;
+
+      function onGAPILoad() {
+        gapi.load('auth2', function() {
+          googleAuth = gapi.auth2.init({client_id: CLIENT_ID});
+          googleAuth.then(googleAuthReady);
+        });
+      };
+
+      // A 'googleAuthReady' callback will be expected to exist.
+      // In subsequent code, use the global variable 'googleAuth'.
+      // googleAuth is a gapi.auth2.GoogleAuth (https://goo.gl/mDwEFB)
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onGAPILoad" async defer></script>
+    <!-- copy-pastable section ends -->
 		
 	</head>
 	<body ng-app="baxterApp" ng-controller="baxterCtrl">
@@ -102,11 +122,16 @@
 				<button type="button"  ng-click="orderListings() ">Back</button>
 			</div>
 			<h1>{{ current_restaurant.title }}</h1>
-	        <select>
+	        <select ng-model="newOrder.order.option">
 	        	<option ng-repeat='dish in current_restaurant.options'>
 	        		{{ dish }}
 	        	</option>
 	        </select>
+	        	<div class="button">
+					<form>
+						<button style = "margin-top: 50px" type="button"  ng-click="submitOrder()">OK</button>
+					</form>
+				</div>
 	    </div>
 
 

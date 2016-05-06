@@ -143,6 +143,12 @@ app.controller('baxterCtrl', ['$scope',
 			$scope.View = 'Order Listings';
 		}
 
+		$scope.orderListings1 = function(){
+			$scope.View = 'Order Listings';
+			$scope.newOrder.order.option;
+			console.log($scope.current_restaurant.option);
+		}
+
 		$scope.startOrder = function(day){
 			$scope.newOrder.day = day;
 			console.log($scope.newOrder)
@@ -157,6 +163,7 @@ app.controller('baxterCtrl', ['$scope',
 
 
 			$scope.newOrder.order.restaurant = restaurant.title;
+			$scope.newOrder.order.option = restaurant.option;
 			console.log($scope.newOrder)
 			$scope.View = 'orderRecord';
 		}
@@ -166,7 +173,9 @@ app.controller('baxterCtrl', ['$scope',
 
 		
 		$scope.submitOrder = function(){
+			console.log($scope.newOrder);
 			$scope.View = 'Confirmation';
+
 		}
 
 		
