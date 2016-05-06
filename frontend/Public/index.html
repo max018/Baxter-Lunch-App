@@ -91,7 +91,7 @@
 			<div class="space">
 				<div class="button">
 					<form>
-						<button type="button"  ng-click="orderListings() ">Back</button>
+						<button type="button" ng-click="orderListings() ">Back</button>
 					</form>
 				</div>
 				<h1>Choose a Resturaunt:</h1>
@@ -116,7 +116,7 @@
 	        
         <div class="orderRecord" ng-if="View == 'orderRecord'">
         	<div class="button">
-				<button type="button"  ng-click="orderListings() ">Back</button>
+				<button type="button"  style= "margin-top: 16px" ng-click="orderListings() ">Back</button>
 			</div>
 			<h1>{{ current_restaurant.title }}</h1>
 	        <select>
@@ -124,6 +124,8 @@
 	        		{{ dish }}
 	        	</option>
 	        </select>
+	        <div class="button">
+	        	<button type="button" style= "margin-top: 30px" ng-click="orderListings()" onclick= "alert('You have successfully recorded and order')"> Place Order </button>
 	    </div>
 
 
