@@ -16,6 +16,7 @@ app.controller('baxterCtrl', ['$scope', '$http',
 	function($scope, $http){
 		window.appScope = $scope; // create global pointer to app scope
 
+		$scope.week_offset = 3;
 
 		$scope.dayNames = [
 			"monday", "tuesday", "wednesday", "thursday", "friday"
@@ -83,44 +84,8 @@ app.controller('baxterCtrl', ['$scope', '$http',
 			}
 		]
 
-		$scope.days = [
-			{	"holiday": null, 
-				"order": {
-					"restaurant": "Zen Chinese Bistro",
-					"option": "Pork Fried Rice"
-				}
-			},
+	
 
-			{	 
-				"order": null
-			},
-
-			{	"holiday": "New Year's Day", 
-				"order": null
-			},
-
-			{	"holiday": null, 
-				"order": {
-					"restaurant": "Portland Pie",
-					"option": "Pizza: Cheese, Cheese"
-				}
-			},	 
-
-			{	"holiday": null, 
-				"order": null
-			},	
-		];
-
-
-
-		$scope.exampleOrder = {
-		  	"week_offset" : 0, 
-		  	"day" : 1, 
-		  	"order" : {
-				"restaurant": "b.good",
-				"option": "Burger",
-			}
-		}
 
 
 	
@@ -130,7 +95,7 @@ app.controller('baxterCtrl', ['$scope', '$http',
 
 		$scope.startOrder = function(day){
 			$scope.newOrder = {
-				"week_offset" : 0, 
+				"week_offset" : 3, 
 			  	"day" : day, 
 			  	"order" : {
 					"restaurant": "",
@@ -149,9 +114,27 @@ app.controller('baxterCtrl', ['$scope', '$http',
 
 		
 		$scope.submitOrder = function(){
-			$scope.View = 'Confirmation';
+			
+			$scope.callAPI('place_order', $scope.newOrder, function(message){
+				$scope.View = 'Confirmation';
+			});
+			
 		}
 
+		$scope.cancelOrder = function(dayIndex){
+
+			var request = {
+				week_offset : $scope.week_offset,
+				day : dayIndex
+			}
+
+			var callback = function(response){
+				$scope.days[dayIndex].order = null;
+				$scope.View = 'Order Listings';
+			}
+
+			$scope.callAPI('cancel_order', request, callback) 	
+		}
 
 
 
@@ -174,7 +157,7 @@ app.controller('baxterCtrl', ['$scope', '$http',
 				$scope.View = 'Loading';
 				$scope.View = 'Order Listings';
 				$scope.$digest();
-				$scope.getOrders(0);
+				$scope.getOrders();
 			}
 			else {
 				$scope.View = 'Login';
@@ -229,9 +212,9 @@ app.controller('baxterCtrl', ['$scope', '$http',
 
 		// GET ORDERS
 		$scope.getOrders = function(week_offset){
-
+			
 			var request = {
-				week_offset : (week_offset) ? week_offset : 0
+				week_offset : $scope.week_offset 
 			}
 
 			var proccess_weekData = function(response){

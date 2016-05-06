@@ -40,7 +40,7 @@
 				<div class="confirm">
 					<p>Your order has been confirmed</p>
 					<br />
-					<button type="button"  ng-click="orderListings() ">Go back</button>
+					<button type="button"  ng-click="getOrders() ">Go back</button>
 				</div>
 			</div>
 		</div>
@@ -71,8 +71,8 @@
 							</a>
 
 							<!-- CANCEL ORDER LINK -->
-							<a ng-click="cancelOrder() " ng-if="day.order">
-								<img src="https://cdn4.iconfinder.com/data/icons/geomicons/32/672366-x-128.png" width="30px" height="30px" margin-top="10px">
+							<a ng-click="cancelOrder(dayIndex) " ng-if="day.order">
+								<img src="https://cdn4.iconfinder.com/data/icons/geomicons/32/672366-x-128.png"  width="30px" height="30px" margin-top="10px">
 							</a>
 
 
@@ -81,7 +81,7 @@
 					</div>	
 
 				</div>
-				<a class="exitLink" style="font-size: 13px" ng-click="signOut()">
+				<a class="exitLink" style= "font-size: 13px" ng-click="signOut()">
 					Log Out
 				</a>
 			</div>
@@ -119,14 +119,16 @@
 				<button type="button"  style= "margin-top: 16px" ng-click="orderListings() ">Back</button>
 			</div>
 			<h1>{{ current_restaurant.title }}</h1>
-	        <select>
+	        <select ng-model="newOrder.order.option">
 	        	<option ng-repeat='dish in current_restaurant.options'>
 	        		{{ dish }}
 	        	</option>
 	        </select>
 	        <div class="button">
-	        	<button type="button" style= "margin-top: 30px" ng-click="orderListings()" onclick= "alert('You have successfully recorded and order')"> Place Order </button>
+	        	<button type="button" style= "margin-top: 30px" ng-click="submitOrder()" > Place Order </button>
+	        </div>
 	    </div>
+
 
 
 		<div ng-if="View == 'Make Order'">
