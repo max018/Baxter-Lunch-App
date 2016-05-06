@@ -1,8 +1,21 @@
 
+
+// CONFIG
+var api_path = 'http://local.baxter-academy.org:8000/';
+var CLIENT_ID = '609547274038-pe286rm7av3mopuklphse16kbd8c82ed.apps.googleusercontent.com';
+window.onGAPILoad = function(){
+	if('appScope' in window) {
+		appScope.initGoogle();
+	}
+}
+
+
 var app = angular.module('baxterApp', []);
 
-app.controller('baxterCtrl', ['$scope',
-	function($scope){
+app.controller('baxterCtrl', ['$scope', '$http',
+	function($scope, $http){
+		window.appScope = $scope; // create global pointer to app scope
+
 
 		$scope.dayNames = [
 			"monday", "tuesday", "wednesday", "thursday", "friday"
@@ -70,9 +83,6 @@ app.controller('baxterCtrl', ['$scope',
 			}
 		]
 
-		console.log($scope.restaurants)
-
-
 		$scope.days = [
 			{	"holiday": null, 
 				"order": {
@@ -102,6 +112,7 @@ app.controller('baxterCtrl', ['$scope',
 		];
 
 
+
 		$scope.exampleOrder = {
 		  	"week_offset" : 0, 
 		  	"day" : 1, 
@@ -110,71 +121,120 @@ app.controller('baxterCtrl', ['$scope',
 				"option": "Burger",
 			}
 		}
-		console.log($scope.exampleOrder)
-
-		
-		$scope.newOrder = {
-			"week_offset" : 0, 
-		  	"day" : null, 
-		  	"order" : {
-				"restaurant": "",
-				"option": "",
-			}
-		};
-		
-
-		$scope.View = "Order Listings";
-		console.log($scope.newOrder)
 
 
-
-		
-		
-
-		$scope.View = 'Order Listings';
 	
 	    $scope.orderListings = function(){
 			$scope.View = 'Order Listings';
 		}
 
 		$scope.startOrder = function(day){
-			$scope.newOrder.day = day;
-			console.log($scope.newOrder)
+			$scope.newOrder = {
+				"week_offset" : 0, 
+			  	"day" : day, 
+			  	"order" : {
+					"restaurant": "",
+					"option": "",
+				}
+			};
 			$scope.View = 'ChooseRestaurant';
 		}
-
 
 
 		$scope.clickRestaurant = function(restaurant){
-			$scope.newOrder.order.restaurant = restaurant.title;
 			$scope.current_restaurant = restaurant;
-			console.log($scope.newOrder)
-			$scope.View = 'ChooseRestaurant';
+			$scope.newOrder.order.restaurant = restaurant.title;
+			$scope.View = 'orderRecord';
 		}
-
-
 
 		
 		$scope.submitOrder = function(){
 			$scope.View = 'Confirmation';
 		}
 
+
+
+
+		$scope.View = 'Login';
 		
-		
-		$scope.order = function(){
-			$scope.View = 'Order';
+
+		/* LOGIN STUFF */
+		$scope.initGoogle = function(){
+			gapi.load('auth2', function() {
+				googleAuth = gapi.auth2.init({client_id: CLIENT_ID});
+				googleAuth.then(function(){
+					$scope.initApp();
+				});
+			});
 		}
-		
-		$scope.orderZen = function(){
-			$scope.View = 'OrderZen';
+
+		$scope.initApp = function(){
+			if (googleAuth.isSignedIn.get()) {
+				$scope.access_token = googleAuth.currentUser.get().getAuthResponse().id_token;
+				$scope.View = 'Loading';
+				$scope.View = 'Order Listings';
+				$scope.$digest();
+				$scope.getOrders(0);
+			}
+			else {
+				$scope.View = 'Login';
+				$scope.$digest();
+			}
 		}
-		
-		$scope.orderKama = function(){
-			$scope.View = 'OrderKama';
+
+		$scope.signIn = function(){
+			if(!googleAuth){
+				$scope.initGoogle();
+				return;
+			}
+			googleAuth.signIn().then(function(){
+				$scope.initApp();
+			});
 		}
-		
-		$scope.orderB = function(){
-			$scope.View = 'OrderB';
+
+		$scope.signOut = function(){
+			$scope.View = 'Login';
+			googleAuth.signOut();
 		}
-	}
-]);
+
+
+		/* IF GOOGLE IS ALREADY UP BY THE TIME ANGULAR COMES ONLINE */
+		if(googleAuth){
+			$scope.initGoogle();	
+		} 
+		
+
+
+		/* API STUFF */
+		$scope.callAPI = function(endpoint, request, callback){
+			request.token = $scope.access_token;
+			$scope.View = 'Loading';
+			$http.post(api_path + endpoint, request).then( 
+				function(response){
+					if(!response.data.success){
+						console.log('something went wrong');
+						console.log(response);	
+					}
+					callback(response.data);
+				},
+				function(response){
+					console.log('something went wrong');
+					console.log(response);
+					$scope.signOut();
+				}
+			);
+		}
+
+
+		// GET ORDERS
+		$scope.getOrders = function(week_offset){
+			var request = {
+				week_offset : (week_offset) ? week_offset : 0
+			}
+			$scope.callAPI('get_week', request, function(response){
+				$scope.days = response.days;
+				$scope.View = 'Order Listings';
+			});
+		}
+
+	}]);
