@@ -17,29 +17,23 @@
 		<script src="baxter-public.js"></script>	
 		<link href='baxter-public.css' rel='stylesheet' type='text/css'>
 
-		  <!-- copy-pastable section begins -->
-    <meta name="google-signin-scope" content="profile email">
-    <script src="id.js"></script>
-    <script>
-      var googleAuth;
+		<!-- GOOGLE AUTHENTICATION -->
+		<meta name="google-signin-scope" content="profile email">
+		<script>var googleAuth;</script>
+		<script src="https://apis.google.com/js/platform.js?onload=onGAPILoad" async defer></script>
 
-      function onGAPILoad() {
-        gapi.load('auth2', function() {
-          googleAuth = gapi.auth2.init({client_id: CLIENT_ID});
-          googleAuth.then(googleAuthReady);
-        });
-      };
-
-      // A 'googleAuthReady' callback will be expected to exist.
-      // In subsequent code, use the global variable 'googleAuth'.
-      // googleAuth is a gapi.auth2.GoogleAuth (https://goo.gl/mDwEFB)
-    </script>
-    <script src="https://apis.google.com/js/platform.js?onload=onGAPILoad" async defer></script>
-    <!-- copy-pastable section ends -->
 		
 	</head>
 	<body ng-app="baxterApp" ng-controller="baxterCtrl">
 
+		<div ng-if="View == 'Login'">
+			<img src="Images/baxter_logo.jpg" class="logo">
+			<img src="Images/sign-in-with-google.png" class="login_btn" ng-click="signIn()">
+		</div>
+
+		<div ng-if="View=='Loading'">
+			<img src="Images/ajax-loader.gif" class="loading_gif">
+		</div>
 
 		<div ng-if="View == 'Confirmation' ">
 			<div class="space">
@@ -87,6 +81,9 @@
 					</div>	
 
 				</div>
+				<a class="exitLink" style="font-size: 13px" ng-click="signOut()">
+					Log Out
+				</a>
 			</div>
 		</div>
 
@@ -122,16 +119,11 @@
 				<button type="button"  ng-click="orderListings() ">Back</button>
 			</div>
 			<h1>{{ current_restaurant.title }}</h1>
-	        <select ng-model="newOrder.order.option">
+	        <select>
 	        	<option ng-repeat='dish in current_restaurant.options'>
 	        		{{ dish }}
 	        	</option>
 	        </select>
-	        	<div class="button">
-					<form>
-						<button style = "margin-top: 50px" type="button"  ng-click="submitOrder()">OK</button>
-					</form>
-				</div>
 	    </div>
 
 
