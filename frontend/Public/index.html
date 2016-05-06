@@ -16,17 +16,31 @@
 		<!-- BAXTER LUNCH APP -->
 		<script src="baxter-public.js"></script>	
 		<link href='baxter-public.css' rel='stylesheet' type='text/css'>
+
+		<!-- GOOGLE AUTHENTICATION -->
+		<meta name="google-signin-scope" content="profile email">
+		<script>var googleAuth;</script>
+		<script src="https://apis.google.com/js/platform.js?onload=onGAPILoad" async defer></script>
+
 		
 	</head>
 	<body ng-app="baxterApp" ng-controller="baxterCtrl">
 
+		<div ng-if="View == 'Login'">
+			<img src="Images/baxter_logo.jpg" class="logo">
+			<img src="Images/sign-in-with-google.png" class="login_btn" ng-click="signIn()">
+		</div>
+
+		<div ng-if="View=='Loading'">
+			<img src="Images/ajax-loader.gif" class="loading_gif">
+		</div>
 
 		<div ng-if="View == 'Confirmation' ">
 			<div class="space">
 				<div class="confirm">
 					<p>Your order has been confirmed</p>
 					<br />
-					<button type="button"  ng-click="orderListings() ">Go back</button>
+					<button type="button"  ng-click="getOrders() ">Go back</button>
 				</div>
 			</div>
 		</div>
@@ -57,8 +71,8 @@
 							</a>
 
 							<!-- CANCEL ORDER LINK -->
-							<a ng-click="cancelOrder() " ng-if="day.order">
-								<img src="https://cdn4.iconfinder.com/data/icons/geomicons/32/672366-x-128.png" width="30px" height="30px" margin-top="10px">
+							<a ng-click="cancelOrder(dayIndex) " ng-if="day.order">
+								<img src="https://cdn4.iconfinder.com/data/icons/geomicons/32/672366-x-128.png"  width="30px" height="30px" margin-top="10px">
 							</a>
 
 
@@ -67,6 +81,9 @@
 					</div>	
 
 				</div>
+				<a class="exitLink" style= "font-size: 13px" ng-click="signOut()">
+					Log Out
+				</a>
 			</div>
 		</div>
 
@@ -74,7 +91,7 @@
 			<div class="space">
 				<div class="button">
 					<form>
-						<button type="button"  ng-click="orderListings() ">Back</button>
+						<button type="button" ng-click="orderListings() ">Back</button>
 					</form>
 				</div>
 				<h1>Choose a Resturaunt:</h1>
@@ -86,6 +103,7 @@
 						<div  ng-repeat='restaurant in restaurants'
 							class="restaurant" ng-click="clickRestaurant(restaurant)" >
 								{{ restaurant.title }}
+								
 						</div>
 					</div>
 				
@@ -94,6 +112,23 @@
 				</div>
 			</div>
         </div>
+
+	        
+        <div class="orderRecord" ng-if="View == 'orderRecord'">
+        	<div class="button">
+				<button type="button"  style= "margin-top: 16px" ng-click="orderListings() ">Back</button>
+			</div>
+			<h1>{{ current_restaurant.title }}</h1>
+	        <select ng-model="newOrder.order.option">
+	        	<option ng-repeat='dish in current_restaurant.options'>
+	        		{{ dish }}
+	        	</option>
+	        </select>
+	        <div class="button">
+	        	<button type="button" style= "margin-top: 30px" ng-click="submitOrder()" > Place Order </button>
+	        </div>
+	    </div>
+
 
 
 		<div ng-if="View == 'Make Order'">
