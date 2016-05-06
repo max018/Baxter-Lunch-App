@@ -214,6 +214,7 @@ app.controller('baxterCtrl', ['$scope', '$http',
 					if(!response.data.success){
 						console.log('something went wrong');
 						console.log(response);	
+						$scope.signOut();
 					}
 					callback(response.data);
 				},
@@ -228,13 +229,22 @@ app.controller('baxterCtrl', ['$scope', '$http',
 
 		// GET ORDERS
 		$scope.getOrders = function(week_offset){
+
 			var request = {
 				week_offset : (week_offset) ? week_offset : 0
 			}
-			$scope.callAPI('get_week', request, function(response){
+
+			var proccess_weekData = function(response){
 				$scope.days = response.days;
 				$scope.View = 'Order Listings';
-			});
+			}
+
+			$scope.callAPI('get_week', request, proccess_weekData);
 		}
 
+
+
+
+
 	}]);
+
