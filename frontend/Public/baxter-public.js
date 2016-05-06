@@ -1,7 +1,7 @@
 
 
 // CONFIG
-var api_path = 'http://local.baxter-academy.org:5000/';
+var api_path = 'http://local.baxter-academy.org:8000/';
 var CLIENT_ID = '609547274038-pe286rm7av3mopuklphse16kbd8c82ed.apps.googleusercontent.com';
 window.onGAPILoad = function(){
 	if('appScope' in window) {
@@ -12,8 +12,8 @@ window.onGAPILoad = function(){
 
 var app = angular.module('baxterApp', []);
 
-app.controller('baxterCtrl', ['$scope',
-	function($scope){
+app.controller('baxterCtrl', ['$scope', '$http',
+	function($scope, $http){
 		window.appScope = $scope; // create global pointer to app scope
 
 
@@ -174,7 +174,7 @@ app.controller('baxterCtrl', ['$scope',
 				$scope.View = 'Loading';
 				$scope.View = 'Order Listings';
 				$scope.$digest();
-				//$scope.getOrders(0);
+				$scope.getOrders(0);
 			}
 			else {
 				$scope.View = 'Login';
@@ -209,18 +209,18 @@ app.controller('baxterCtrl', ['$scope',
 		$scope.callAPI = function(endpoint, request, callback){
 			request.token = $scope.access_token;
 			$scope.View = 'Loading';
-			$.post(api_path + endpoint, request, 
+			$http.post(api_path + endpoint, request).then( 
 				function(response){
-					if(!response.success){
+					if(!response.data.success){
 						console.log('something went wrong');
 						console.log(response);	
 					}
-					callback(response);
-					$scope.$digest();
+					callback(response.data);
 				},
 				function(response){
 					console.log('something went wrong');
 					console.log(response);
+					$scope.signOut();
 				}
 			);
 		}
@@ -231,8 +231,8 @@ app.controller('baxterCtrl', ['$scope',
 			var request = {
 				week_offset : (week_offset) ? week_offset : 0
 			}
-			$scope.callAPI('get_orders', request, function(response){
-				$scope.days = response;
+			$scope.callAPI('get_week', request, function(response){
+				$scope.days = response.days;
 				$scope.View = 'Order Listings';
 			});
 		}
