@@ -4,11 +4,13 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask.ext.cors import CORS
 from config import config
+from json_ext import CustomJSONEncoder
 
 app = Flask(__name__)
 app.config.update(config)
 db = SQLAlchemy(app)
 CORS(app)
+app.json_encoder = CustomJSONEncoder
 
 from validations import *
 from errors import BadRequestJSON
@@ -50,7 +52,7 @@ def cancel_order(student, date):
 @get_week_val
 def get_week(student, week):
     data = {'studentid': student['studentid'], 'week': week.days()}
-    query = 'SELECT o.order_data AS order, d.holiday'\
+    query = 'SELECT day AS date, o.order_data AS order, d.holiday'\
         ' FROM unnest(%(week)s) AS r (day)'\
             ' LEFT JOIN'\
                 ' (SELECT * FROM orders WHERE studentid = %(studentid)s)'\
