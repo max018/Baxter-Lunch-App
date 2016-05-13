@@ -55,7 +55,7 @@
 					
 					<div class="day" ng-repeat='(dayIndex, day) in days'>
 						<div class="left">
-							<div class="dayName">{{dayNames[dayIndex]}}</div>
+							<div class="dayName">{{dayNames[dayIndex]}} - {{day.date}}</div>
 							<p ng-if="day.holiday">Holiday: {{day.holiday}}</p>
 							
 							<p ng-if="day.order">

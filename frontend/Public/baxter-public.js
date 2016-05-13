@@ -22,9 +22,13 @@ app.controller('baxterCtrl', ['$scope', '$http',
 			"monday", "tuesday", "wednesday", "thursday", "friday"
 		];
 
+		$scope.dates = [
+			$scope.week_offset = "week in week_offset"
+		];
+
 		$scope.restaurants = [
 			{
-				title : "Portland Pie",
+				"title" : "Portland Pie",
 				"simple":false,
 				"groups":{
 					"pizza": [ 
